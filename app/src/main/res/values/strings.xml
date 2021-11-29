@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Track Me</string>
+    <string name="Sign_Up_Text"><u>Sign Up</u></string>
+    <string name="Login_Text"><u>Login</u></string>
 </resources>
