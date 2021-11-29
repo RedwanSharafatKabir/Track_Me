@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "676386159618",
+    "project_id": "track-me-b67d0",
+    "storage_bucket": "track-me-b67d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676386159618:android:11c968faf79a3dbcef7b1b",
+        "android_client_info": {
+          "package_name": "com.gpspayroll.track_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676386159618-nj5ffnobftpbhtc7e6b8fokid3o7a0eo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gpspayroll.track_me",
+            "certificate_hash": "ba66300bdcdc747b956b55b83dd684ef42652127"
+          }
+        },
+        {
+          "client_id": "676386159618-4i9jridf8eo1s017ohfu2j24o54ickkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5UvE8fz3iGQefZzH5dDD6UbGoR4Yy4HE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676386159618-4i9jridf8eo1s017ohfu2j24o54ickkq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
