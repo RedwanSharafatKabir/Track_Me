@@ -7,7 +7,22 @@
     android:background="@drawable/gps_wall"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".SignupActivity">
+    tools:context=".Authentication.SignupActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#79741A9A">
+
+        <ImageView
+            android:id="@+id/backPageId"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back_arrow"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="15dp"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,7 +96,7 @@
                             android:paddingBottom="12dp"
                             android:textSize="16sp"
                             android:hint=" Username"
-                            android:inputType="text"
+                            android:inputType="textCapSentences"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="#99CC9393"
@@ -106,7 +121,7 @@
                             android:paddingBottom="12dp"
                             android:textSize="16sp"
                             android:hint=" Phone"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="#99CC9393"
@@ -131,7 +146,7 @@
                             android:paddingBottom="12dp"
                             android:textSize="16sp"
                             android:hint=" Email"
-                            android:inputType="text"
+                            android:inputType="textEmailAddress"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="#99CC9393"
@@ -147,7 +162,8 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         app:passwordToggleEnabled="true"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        app:passwordToggleTint="#fff">
 
                         <EditText
                             android:id="@+id/inputSignupPassId"
