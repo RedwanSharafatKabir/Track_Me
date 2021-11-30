@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.gpspayroll.track_me.MainActivity;
+import com.gpspayroll.track_me.EmployeeActivity.MainActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployeeData;
 import com.gpspayroll.track_me.R;
 
@@ -38,15 +38,15 @@ import java.io.IOException;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
 
-    View parentLayout;
-    ImageView backPage;
-    ProgressDialog waitingDialog;
-    ConnectivityManager cm;
-    NetworkInfo netInfo;
-    FirebaseAuth mAuth;
-    TextView loginPage, signUp;
-    DatabaseReference databaseReference;
-    EditText signupEmailText, signupUsernameText, signupPasswordText, signupPhoneText;
+    private View parentLayout;
+    private ImageView backPage;
+    private ProgressDialog waitingDialog;
+    private ConnectivityManager cm;
+    private NetworkInfo netInfo;
+    private FirebaseAuth mAuth;
+    private TextView loginPage, signUp;
+    private DatabaseReference databaseReference;
+    private EditText signupEmailText, signupUsernameText, signupPasswordText, signupPhoneText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,6 +235,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 }
