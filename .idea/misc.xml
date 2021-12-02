@@ -16,6 +16,11 @@
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_about.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_dashboard.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_profile.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/menu/activity_main_drawer.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.16197916666666667" />
       </map>
     </option>
