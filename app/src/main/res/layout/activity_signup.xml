@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/gps_wall"
+    android:background="@color/lightPurpleBackground"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Authentication.SignupActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#79741A9A">
+        android:layout_height="60dp">
 
         <ImageView
             android:id="@+id/backPageId"
@@ -28,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#79741A9A"
         android:gravity="center">
 
         <LinearLayout
@@ -44,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Register"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginLeft="5dp"
@@ -55,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Sign up a new account"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginLeft="5dp"
@@ -99,9 +97,9 @@
                             android:inputType="textCapSentences"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#99CC9393"
-                            android:textColor="#fff"
-                            android:textColorHint="#fff"
+                            android:background="#fff"
+                            android:textColor="#000"
+                            android:textColorHint="#000"
                             android:drawableRight="@drawable/ic_outline_person_24"
                             android:layout_gravity="center"/>
 
@@ -124,9 +122,9 @@
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#99CC9393"
-                            android:textColor="#fff"
-                            android:textColorHint="#fff"
+                            android:background="#fff"
+                            android:textColor="#000"
+                            android:textColorHint="#000"
                             android:drawableRight="@drawable/ic_outline_phone_24"
                             android:layout_gravity="center"/>
 
@@ -149,9 +147,9 @@
                             android:inputType="textEmailAddress"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#99CC9393"
-                            android:textColor="#fff"
-                            android:textColorHint="#fff"
+                            android:background="#fff"
+                            android:textColor="#000"
+                            android:textColorHint="#000"
                             android:drawableRight="@drawable/ic_outline_email_24"
                             android:layout_gravity="center"/>
 
@@ -163,16 +161,16 @@
                         android:background="@android:color/transparent"
                         app:passwordToggleEnabled="true"
                         android:layout_marginTop="10dp"
-                        app:passwordToggleTint="#fff">
+                        app:passwordToggleTint="@color/colorPrimaryDark">
 
                         <EditText
                             android:id="@+id/inputSignupPassId"
                             android:inputType="textPassword"
                             android:textSize="16sp"
                             android:hint=" Password"
-                            android:background="#99CC9393"
-                            android:textColor="#fff"
-                            android:textColorHint="#fff"
+                            android:background="#fff"
+                            android:textColor="#000"
+                            android:textColorHint="#000"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -197,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="SIGN UP"
-                        android:textColor="#fff"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:background="@drawable/white_curved_shape"
@@ -224,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Already Have an Account? "
-                        android:textColor="#fff"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
 
@@ -234,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/Login_Text"
-                        android:textColor="#fff"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
 

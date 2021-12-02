@@ -3,15 +3,19 @@ package com.gpspayroll.track_me.EmployeeFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gpspayroll.track_me.Authentication.LoginActivity;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
@@ -22,16 +26,34 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Dashboard extends Fragment implements BackListenerFragment{
+public class Dashboard extends Fragment implements BackListenerFragment, View.OnClickListener{
 
-    public static BackListenerFragment backBtnListener;
     private View views;
+    private CardView checkIn, checkOut;
+    private TextView curentLocation;
+    private NetworkInfo netInfo;
+    private ConnectivityManager cm;
+    public static BackListenerFragment backBtnListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         views = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        netInfo = cm.getActiveNetworkInfo();
+
+        curentLocation = views.findViewById(R.id.curentLocationId);
+        checkIn = views.findViewById(R.id.checkInId);
+        checkIn.setOnClickListener(this);
+        checkOut = views.findViewById(R.id.checkOutId);
+        checkOut.setOnClickListener(this);
+
         return views;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     @Override

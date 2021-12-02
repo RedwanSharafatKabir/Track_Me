@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/gps_wall"
+    android:background="@color/lightPurpleBackground"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Authentication.LoginActivity">
@@ -12,8 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#79741A9A">
+        android:orientation="vertical">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="130dp"
@@ -38,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Login"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginLeft="5dp"
@@ -49,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Sign in to your account"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
                 android:layout_marginLeft="5dp"
@@ -93,9 +92,9 @@
                             android:inputType="number"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#99CC9393"
-                            android:textColor="#fff"
-                            android:textColorHint="#fff"
+                            android:background="#fff"
+                            android:textColor="#000"
+                            android:textColorHint="#000"
                             android:layout_gravity="center"
                             android:drawableRight="@drawable/ic_outline_phone_24"/>
 
@@ -106,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="#fff"
+                        app:passwordToggleTint="@color/colorPrimaryDark"
                         android:layout_marginTop="10dp">
 
                         <EditText
@@ -114,9 +113,9 @@
                             android:inputType="textPassword"
                             android:textSize="16sp"
                             android:hint=" Password"
-                            android:background="#99CC9393"
-                            android:textColor="#fff"
-                            android:textColorHint="#fff"
+                            android:background="#fff"
+                            android:textColor="#000"
+                            android:textColorHint="#000"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -133,8 +132,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Remember password"
-                    android:textColor="#fff"
-                    android:buttonTint="#fff"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:buttonTint="@color/colorPrimaryDark"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="LOGIN"
-                        android:textColor="#fff"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:background="@drawable/white_curved_shape"
@@ -177,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Create New Account? "
-                        android:textColor="#fff"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
 
@@ -187,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/Sign_Up_Text"
-                        android:textColor="#fff"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
                         android:textStyle="bold"/>
 

@@ -34,10 +34,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener{
 
-    private String passedString = "";
     public BottomNavigationView bottomNavigationView;
-    private NetworkInfo netInfo;
-    private ConnectivityManager cm;
     private Fragment fragment;
     private FragmentTransaction fragmentTransaction;
 
@@ -45,9 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        netInfo = cm.getActiveNetworkInfo();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationID);
         bottomNavigationView.setOnItemSelectedListener(this);
