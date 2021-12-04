@@ -11,9 +11,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="165dp"
         android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:background="@color/colorAccent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePicId"
@@ -23,36 +23,23 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="15dp"
-            android:src="@drawable/ic_outline_account_box_24"/>
-
-        <TextView
-            android:id="@+id/userNamePofileId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/colorAccent"
-            android:gravity="center"
-            android:layout_gravity="center|top"
-            android:text="Redwan"
-            android:fontFamily="sans-serif"
-            android:textStyle="bold"/>
-
-        <ProgressBar
-            android:id="@+id/profileProgressId"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:indeterminate="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:src="@drawable/profile_image"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/profileProgressId"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:layout_marginTop="170dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="180dp"
         android:layout_marginBottom="140dp">
 
         <LinearLayout
@@ -63,8 +50,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp">
 
@@ -79,23 +66,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_marginTop="10dp">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/profile_avatar"
+                            android:src="@drawable/profile_image"
                             android:padding="5dp"/>
 
                         <TextView
-                            android:id="@+id/fullNameId"
+                            android:id="@+id/userNameId"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="16sp"
                             android:textColor="@color/colorPrimaryDark"
                             android:gravity="center|left"
-                            android:fontFamily="@font/faustina_medium"/>
+                            android:fontFamily="sans-serif"/>
 
                     </LinearLayout>
 
@@ -105,14 +93,15 @@
                         android:background="@color/colorPrimaryDark"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_marginTop="10dp">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -122,13 +111,13 @@
                             android:padding="8dp"/>
 
                         <TextView
-                            android:id="@+id/phoneId"
+                            android:id="@+id/userPhoneId"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="16sp"
                             android:textColor="@color/colorPrimaryDark"
                             android:gravity="center|left"
-                            android:fontFamily="@font/faustina_medium"/>
+                            android:fontFamily="sans-serif"/>
 
                     </LinearLayout>
 
@@ -138,14 +127,16 @@
                         android:background="@color/colorPrimaryDark"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -161,7 +152,7 @@
                             android:textSize="16sp"
                             android:textColor="@color/colorPrimaryDark"
                             android:gravity="center|left"
-                            android:fontFamily="@font/faustina_medium"/>
+                            android:fontFamily="sans-serif"/>
 
                     </LinearLayout>
 
@@ -178,7 +169,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:orientation="vertical"
-        android:gravity="center|bottom">
+        android:gravity="center|bottom"
+        android:layout_marginBottom="60dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -220,7 +212,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:gravity="center|left"
                         android:text="Reset Password"
-                        android:fontFamily="@font/faustina_medium" />
+                        android:fontFamily="sans-serif" />
 
                 </LinearLayout>
 
@@ -258,7 +250,7 @@
                         android:textColor="@color/Red"
                         android:gravity="center|left"
                         android:text="Log Out"
-                        android:fontFamily="@font/faustina_medium" />
+                        android:fontFamily="sans-serif" />
 
                 </LinearLayout>
 

@@ -28,7 +28,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.gpspayroll.track_me.EmployeeActivity.MainActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployeeData;
 import com.gpspayroll.track_me.R;
 
@@ -171,7 +170,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 rememberMethod("I_User");
 
                                 finish();
-                                Intent it = new Intent(SignupActivity.this, MainActivity.class);
+                                Intent it = new Intent(SignupActivity.this, LoginActivity.class);
                                 startActivity(it);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 

@@ -29,8 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gpspayroll.track_me.AdminActivity.MainActivityAdmin;
-import com.gpspayroll.track_me.EmployeeActivity.MainActivity;
+import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
 import com.gpspayroll.track_me.R;
 
 import java.io.BufferedReader;
@@ -84,13 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         user = FirebaseAuth.getInstance().getCurrentUser();
         gotUserMethod();
 
-        if (user != null && !getPassedString.isEmpty() && userRole.equals("adminS")) {
-            finish();
-            Intent it = new Intent(getApplicationContext(), MainActivityAdmin.class);
-            startActivity(it);
-        }
-
-        if (user != null && !getPassedString.isEmpty() && userRole.equals("employeeS")) {
+        if (user != null && !getPassedString.isEmpty()) {
             finish();
             Intent it = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(it);
@@ -147,6 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     waitingDialog.dismiss();
 
                                                     Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                                                    it.putExtra("messageRole", "employeeS");
                                                     startActivity(it);
                                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                                     finish();
@@ -176,6 +170,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     waitingDialog.dismiss();
 
                                                     Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                                                    it.putExtra("messageRole", "employeeS");
                                                     startActivity(it);
                                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                                     finish();
@@ -195,9 +190,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
 
                                 } catch (Exception e) {
-
                                     // Access Admin Email
-
                                     try {
                                         adminReference.child(phone).child("userEmail").addValueEventListener(new ValueEventListener() {
                                             @Override
@@ -207,6 +200,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                                     if (rememberPass.isChecked()) {
                                                         rememberMethod(passedString, "adminS");
+                                                        rememberAdminPhone(phone);
 
                                                         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                             @Override
@@ -214,7 +208,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                                 if (task.isSuccessful()) {
                                                                     waitingDialog.dismiss();
 
-                                                                    Intent it = new Intent(LoginActivity.this, MainActivityAdmin.class);
+                                                                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                                                                    it.putExtra("messageRole", "adminS");
                                                                     startActivity(it);
                                                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                                                     finish();
@@ -243,7 +238,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                                 if (task.isSuccessful()) {
                                                                     waitingDialog.dismiss();
 
-                                                                    Intent it = new Intent(LoginActivity.this, MainActivityAdmin.class);
+                                                                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                                                                    it.putExtra("messageRole", "adminS");
                                                                     startActivity(it);
                                                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                                                     finish();
@@ -304,6 +300,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             FileOutputStream fileOutputStream2 = openFileOutput("Users_Role.txt", Context.MODE_PRIVATE);
             fileOutputStream2.write(userRole.getBytes());
             fileOutputStream2.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void rememberAdminPhone(String phone){
+        try {
+            FileOutputStream fileOutputStream = openFileOutput("Admin_Phone.txt", Context.MODE_PRIVATE);
+            fileOutputStream.write(phone.getBytes());
+            fileOutputStream.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.gpspayroll.track_me.About;
+package com.gpspayroll.track_me.DashboardAndAbout;
 
 import android.os.Bundle;
 
@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
-import com.gpspayroll.track_me.EmployeeActivity.MainActivity;
-import com.gpspayroll.track_me.EmployeeFragment.Dashboard;
 import com.gpspayroll.track_me.R;
 
 public class AboutFragment extends Fragment implements BackListenerFragment {
@@ -32,7 +30,6 @@ public class AboutFragment extends Fragment implements BackListenerFragment {
 
         fragment = new Dashboard();
         fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
         fragmentTransaction.replace(R.id.fragmentID, fragment, "EMPLOYEE_FRAGMENT");
         fragmentTransaction.commit();
     }

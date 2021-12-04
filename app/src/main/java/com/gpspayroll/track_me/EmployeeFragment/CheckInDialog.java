@@ -75,12 +75,15 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        netInfo = cm.getActiveNetworkInfo();
+        if(v.getId()==R.id.confirmCheckInId) {
+            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            netInfo = cm.getActiveNetworkInfo();
 
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-        } else {
-            Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+
+            } else {
+                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

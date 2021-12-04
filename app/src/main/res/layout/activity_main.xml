@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmployeeActivity.MainActivity">
+    tools:context=".DashboardAndAbout.MainActivity">
 
     <fragment
         android:id="@+id/fragmentID"
-        android:name="com.gpspayroll.track_me.EmployeeFragment.Dashboard"
+        android:name="com.gpspayroll.track_me.DashboardAndAbout.Dashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -1,47 +1,41 @@
-package com.gpspayroll.track_me.EmployeeActivity;
+package com.gpspayroll.track_me.DashboardAndAbout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.navigation.NavigationView;
-import com.gpspayroll.track_me.About.AboutFragment;
-import com.gpspayroll.track_me.AdminActivity.MainActivityAdmin;
-import com.gpspayroll.track_me.Authentication.LoginActivity;
-import com.gpspayroll.track_me.EmployeeFragment.Dashboard;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.gpspayroll.track_me.DashboardAndAbout.AboutFragment;
+import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
 import com.gpspayroll.track_me.Profile.ProfileFragment;
 import com.gpspayroll.track_me.R;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener{
 
     public BottomNavigationView bottomNavigationView;
     private Fragment fragment;
     private FragmentTransaction fragmentTransaction;
+    private String userRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gotUserMethod();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationID);
         bottomNavigationView.setOnItemSelectedListener(this);
@@ -51,6 +45,28 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentID, fragment, "EMPLOYEE_FRAGMENT");
         fragmentTransaction.commit();
+    }
+
+    private void gotUserMethod(){
+        try {
+            String recievedMessageTc;
+            FileInputStream fileInputStreamTc = openFileInput("Users_Role.txt");
+            InputStreamReader inputStreamReaderTc = new InputStreamReader(fileInputStreamTc);
+            BufferedReader bufferedReaderTc = new BufferedReader(inputStreamReaderTc);
+            StringBuffer stringBufferTc = new StringBuffer();
+
+            while((recievedMessageTc = bufferedReaderTc.readLine())!=null){
+                stringBufferTc.append(recievedMessageTc);
+            }
+
+            userRole = stringBufferTc.toString();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -81,7 +97,11 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             case R.id.profileID:
                 bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
 
+                Bundle bundle = new Bundle();
+                bundle.putString("messageRole", userRole);
+
                 fragment = new ProfileFragment();
+                fragment.setArguments(bundle);
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentID, fragment);
                 fragmentTransaction.commit();
