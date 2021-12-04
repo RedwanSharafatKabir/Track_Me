@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="65dp"
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -52,34 +52,6 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" Hello, "
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="16sp"
-                android:textColor="#fff"
-                android:fontFamily="sans-serif"/>
-
-            <TextView
-                android:id="@+id/showUserNameId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textSize="16sp"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif"
-                android:text="Munna"/>
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <ScrollView
@@ -96,7 +68,7 @@
                 android:id="@+id/checkInId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="10dp"
+                app:cardElevation="8dp"
                 app:cardCornerRadius="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
@@ -139,7 +111,7 @@
                 android:id="@+id/checkOutId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="10dp"
+                app:cardElevation="8dp"
                 app:cardCornerRadius="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"

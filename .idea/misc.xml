@@ -4,10 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Poribohon Lagbe/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
-        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/drawable/back_arrow.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/drawable/white_curved_shape.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_main_admin.xml" value="0.209375" />
-        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.22" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/dialog_check_in.xml" value="0.33" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/dialog_check_out.xml" value="0.22" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_about.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_dashboard.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_profile.xml" value="0.209375" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/back_arrow.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_checkout.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_outline_account_box_24.xml" value="0.2942708333333333" />

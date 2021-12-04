@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gpspayroll.track_me.Authentication.LoginActivity;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
@@ -25,6 +26,9 @@ import com.gpspayroll.track_me.R;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Dashboard extends Fragment implements BackListenerFragment, View.OnClickListener{
 
@@ -39,9 +43,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         views = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        netInfo = cm.getActiveNetworkInfo();
-
         curentLocation = views.findViewById(R.id.curentLocationId);
         checkIn = views.findViewById(R.id.checkInId);
         checkIn.setOnClickListener(this);
@@ -53,7 +54,31 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
     @Override
     public void onClick(View v) {
+        if(v.getId()==R.id.checkInId){
+            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            netInfo = cm.getActiveNetworkInfo();
 
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                CheckInDialog checkInDialog = new CheckInDialog();
+                checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+
+            } else {
+                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if(v.getId()==R.id.checkOutId){
+            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            netInfo = cm.getActiveNetworkInfo();
+
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                CheckOutDialog checkOutDialog = new CheckOutDialog();
+                checkOutDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+
+            } else {
+                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
