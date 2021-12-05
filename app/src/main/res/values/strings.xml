@@ -2,6 +2,9 @@
     <string name="app_name">Track Me</string>
     <string name="Sign_Up_Text"><u>Sign Up</u></string>
     <string name="Login_Text"><u>Login</u></string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="work_hour">5 days a week.\n[ 10:00 AM to 6:00 PM ]</string>
+    <string name="total_employee">About 400+ Hardworking and Co-operative Employees</string>
+    <string name="weekend">Friday to Saturday +\nYearly company tour</string>
+
 </resources>

@@ -17,9 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".AdminActivity.MainActivityAdmin"
-            android:exported="true" />
+
         <activity
             android:name=".Authentication.SignupActivity"
             android:exported="true"

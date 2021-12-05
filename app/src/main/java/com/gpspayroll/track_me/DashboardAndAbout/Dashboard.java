@@ -16,6 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gpspayroll.track_me.AdminFragment.EmployeeSalary;
+import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.EmployeeFragment.CheckInDialog;
 import com.gpspayroll.track_me.EmployeeFragment.CheckOutDialog;
@@ -45,6 +49,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     public static BackListenerFragment backBtnListener;
     private CardView checkIn, checkOut, officeTimeline, employees;
     private String latitude = "", longitude = "", currentPlace = "", userRole;
+    private Fragment fragment;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,9 +90,9 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                 checkOut.setVisibility(View.GONE);
 
             } else if(userRole.equals("employeeS")){
-                officeTimeline.setVisibility(View.GONE);
                 employees.setVisibility(View.GONE);
 
+                officeTimeline.setVisibility(View.VISIBLE);
                 checkIn.setVisibility(View.VISIBLE);
                 checkOut.setVisibility(View.VISIBLE);
             }
@@ -170,6 +176,25 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
             } else {
                 Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        // Admin
+        if(v.getId()==R.id.officecTimelineId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new OfficeTimeline();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
+        }
+
+        if(v.getId()==R.id.employeesId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new EmployeeSalary();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
         }
     }
 

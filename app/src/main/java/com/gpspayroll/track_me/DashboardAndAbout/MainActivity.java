@@ -12,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.gpspayroll.track_me.AdminFragment.EmployeeSalary;
+import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
 import com.gpspayroll.track_me.DashboardAndAbout.AboutFragment;
 import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
 import com.gpspayroll.track_me.Profile.ProfileFragment;
@@ -124,6 +126,14 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
         if(ProfileFragment.backBtnListener!=null){
             ProfileFragment.backBtnListener.onBackPressed();
+        }
+
+        if(EmployeeSalary.backBtnListener!=null){
+            EmployeeSalary.backBtnListener.onBackPressed();
+        }
+
+        if(OfficeTimeline.backBtnListener!=null){
+            OfficeTimeline.backBtnListener.onBackPressed();
         }
     }
 }

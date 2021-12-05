@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AdminFragment.OfficeTimeline"
+    android:background="@color/lightPurpleBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/eub"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/companyNameId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="European University of Bangladesh"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#fff"
+                        android:weightSum="30"
+                        android:gravity="center|left">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Office Location"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="18sp"
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:paddingLeft="10dp"/>
+
+                            <TextView
+                                android:id="@+id/officeLocationId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="14sp"
+                                android:textColor="@color/GreyBlack"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:layout_marginTop="5dp"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="10"
+                            android:src="@drawable/location"
+                            android:padding="15dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#fff"
+                        android:weightSum="30"
+                        android:gravity="center|left">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Work Hours"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="18sp"
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:paddingLeft="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="14sp"
+                                android:textColor="@color/GreyBlack"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/work_hour"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="10"
+                            android:src="@drawable/working_hours"
+                            android:padding="10dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/checkInId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#fff"
+                        android:weightSum="30"
+                        android:gravity="center|left">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Total Employees"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="18sp"
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:paddingLeft="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="14sp"
+                                android:textColor="@color/GreyBlack"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/total_employee"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="10"
+                            android:src="@drawable/total_employees"
+                            android:padding="17dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="100dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:background="#fff"
+                        android:weightSum="30"
+                        android:gravity="center|left">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Weekend"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="18sp"
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:paddingLeft="10dp"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:fontFamily="sans-serif"
+                                android:textSize="14sp"
+                                android:textColor="@color/GreyBlack"
+                                android:layout_gravity="center"
+                                android:paddingLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/weekend"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="10"
+                            android:src="@drawable/weekend"
+                            android:padding="16dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|right|bottom"
+        android:id="@+id/backPageFloatingId"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="60dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_keyboard_double_arrow_left_24"
+            android:background="@color/colorAccent"
+            android:text=" Back"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:paddingRight="20dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
