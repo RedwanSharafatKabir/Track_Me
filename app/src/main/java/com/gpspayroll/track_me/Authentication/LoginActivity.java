@@ -160,8 +160,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     }
 
                                     if (!rememberPass.isChecked()) {
-                                        passedString = "";
-                                        setNullMethod(passedString);
+                                        rememberMethod("", "employeeS");
 
                                         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
@@ -229,8 +228,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                     }
 
                                                     if (!rememberPass.isChecked()) {
-                                                        passedString = "";
-                                                        setNullMethod(passedString);
+                                                        rememberMethod("", "adminS");
+                                                        rememberAdminPhone(phone);
 
                                                         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                             @Override
@@ -313,20 +312,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         try {
             FileOutputStream fileOutputStream = openFileOutput("Admin_Phone.txt", Context.MODE_PRIVATE);
             fileOutputStream.write(phone.getBytes());
-            fileOutputStream.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setNullMethod(String passedString){
-        try {
-            FileOutputStream fileOutputStream = openFileOutput("Users_Info.txt", Context.MODE_PRIVATE);
-            fileOutputStream.write(passedString.getBytes());
             fileOutputStream.close();
         }
         catch (FileNotFoundException e) {

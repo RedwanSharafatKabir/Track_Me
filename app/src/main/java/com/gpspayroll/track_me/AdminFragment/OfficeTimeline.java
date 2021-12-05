@@ -110,13 +110,18 @@ public class OfficeTimeline  extends Fragment implements BackListenerFragment, V
         String provider = locationManager.getBestProvider(criteria, true);
         Location location = locationManager.getLastKnownLocation(provider);
 
-        latitude = String.valueOf(location.getLatitude());
-        longitude = String.valueOf(location.getLongitude());
+        try {
+            latitude = String.valueOf(location.getLatitude());
+            longitude = String.valueOf(location.getLongitude());
+        } catch (Exception e){
+            Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+        }
 
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
         List<Address> addressList;
 
         try {
+            Double lat = Double.parseDouble(latitude), log = Double.parseDouble(longitude);
             addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
             currentPlace = addressList.get(0).getAddressLine(0);
 
