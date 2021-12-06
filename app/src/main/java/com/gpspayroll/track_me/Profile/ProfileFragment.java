@@ -194,6 +194,10 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
             fileOutputStream.write(passedString.getBytes());
             fileOutputStream.close();
 
+            FileOutputStream fileOutputStream2 = getActivity().openFileOutput("Admin_Phone.txt", Context.MODE_PRIVATE);
+            fileOutputStream2.write(passedString.getBytes());
+            fileOutputStream2.close();
+
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

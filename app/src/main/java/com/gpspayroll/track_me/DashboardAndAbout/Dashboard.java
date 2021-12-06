@@ -1,8 +1,10 @@
 package com.gpspayroll.track_me.DashboardAndAbout;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -21,6 +23,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +33,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -65,8 +77,10 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     private ConnectivityManager cm;
     private boolean checkInOut;
     private ProgressBar progressBar;
+    private int PERMISSION_ID = 101;
     private FragmentTransaction fragmentTransaction;
     public static BackListenerFragment backBtnListener;
+    private FusedLocationProviderClient mFusedLocationClient;
     private DatabaseReference databaseReference, employeeReference;
     private CardView checkIn, checkOut, officeTimeline, employees, salaryHistory;
     private String userRole, latitude = "", longitude = "", currentPlace = "";
@@ -115,13 +129,16 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
             Log.i("Exception", e.getMessage());
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Office Location");
-        employeeReference = FirebaseDatabase.getInstance().getReference("Employees List");
         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Office Location");
+        employeeReference = FirebaseDatabase.getInstance().getReference("Employees List");
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             requestLocation();
+//            getLastLocation();
             checkEmployeeValidLocation();
 
         } else {
@@ -130,6 +147,128 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
         return views;
     }
+
+    // Provided by Akhter Vai
+/*
+    @SuppressLint("MissingPermission")
+    private void getLastLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                mFusedLocationClient.getLastLocation().addOnCompleteListener(
+                        new OnCompleteListener<Location>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Location> task) {
+                                Location location = task.getResult();
+                                if (location == null) {
+                                    requestNewLocationData();
+                                } else {
+                                    latitude = String.valueOf(location.getLatitude());
+                                    longitude = String.valueOf(location.getLongitude());
+                                    Log.wtf("lat", latitude);
+                                    Log.wtf("lon", longitude);
+
+                                    getAdminPhone();
+                                    currentPlace = getCompleteAddressString(getActivity(), location.getLatitude(), location.getLongitude());
+                                    storeOfficeLocation(adminPhone, latitude, longitude, currentPlace);
+                                }
+                            }
+                        }
+                );
+            } else {
+                Toast.makeText(getActivity(), "Turn on location", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        } else {
+            requestPermissions();
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestNewLocationData() {
+
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(0);
+        mLocationRequest.setFastestInterval(0);
+        mLocationRequest.setNumUpdates(1);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        mFusedLocationClient.requestLocationUpdates(
+                mLocationRequest, mLocationCallback,
+                Looper.myLooper()
+        );
+    }
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            Location mLastLocation = locationResult.getLastLocation();
+            latitude = String.valueOf(mLastLocation.getLatitude());
+            longitude = String.valueOf(mLastLocation.getLongitude());
+        }
+    };
+
+    private boolean checkPermissions() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
+    }
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                PERMISSION_ID
+        );
+    }
+
+    private boolean isLocationEnabled() {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+                LocationManager.NETWORK_PROVIDER
+        );
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_ID) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            }
+        }
+    }
+
+    public static String getCompleteAddressString(Context ctx, double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(ctx, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+
+                strAdd = strReturnedAddress.toString();
+
+                Log.wtf("My Current location address", strReturnedAddress.toString());
+
+            } else {
+                Log.wtf("My Current location address", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.wtf("My Current location address", "Cannot get Address!");
+        }
+
+        return strAdd;
+    }
+*/
 
     private void requestLocation() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -161,29 +300,29 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         String provider = locationManager.getBestProvider(criteria, true);
         Location location = locationManager.getLastKnownLocation(provider);
 
-        try {
-            latitude = String.valueOf(location.getLatitude());
-            longitude = String.valueOf(location.getLongitude());
-        } catch (Exception e){
-            Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
-        }
+        if(location!=null) {
+            try {
+                latitude = String.valueOf(location.getLatitude());
+                longitude = String.valueOf(location.getLongitude());
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
 
-        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-        List<Address> addressList;
+            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+            List<Address> addressList;
 
-        try {
-            if(!latitude.isEmpty() && !longitude.isEmpty()){
+            try {
                 addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 currentPlace = addressList.get(0).getAddressLine(0);
 
                 getAdminPhone();
                 storeOfficeLocation(adminPhone, latitude, longitude, currentPlace);
 
-            } else {
-                Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                Log.i("ERROR ", "Permission Denied");
             }
-        } catch (IOException e) {
-            Log.i("ERROR ", "Permission Denied");
+        } else {
+            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -276,10 +415,12 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
                             } catch (Exception e) {
                                 Log.i("Exception", e.getMessage());
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     } catch (Exception e){
                         Log.i("Exception", e.getMessage());
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
 
@@ -288,6 +429,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
             });
         } catch (Exception e){
             Log.i("Exception", e.getMessage());
+            progressBar.setVisibility(View.GONE);
         }
     }
 
