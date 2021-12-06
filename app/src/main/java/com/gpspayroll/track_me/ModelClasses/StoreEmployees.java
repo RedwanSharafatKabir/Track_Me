@@ -7,14 +7,17 @@ public class StoreEmployees {
     private String workhour;
     private String remuneration;
     private String userPhone;
+    private String employeeLocation;
 
-    public StoreEmployees(String username, String checkin, String checkout, String workhour, String remuneration, String userPhone) {
+    public StoreEmployees(String username, String checkin, String checkout, String workhour,
+                          String remuneration, String userPhone, String employeeLocation) {
         this.username = username;
         this.checkin = checkin;
         this.checkout = checkout;
         this.workhour = workhour;
         this.remuneration = remuneration;
         this.userPhone = userPhone;
+        this.employeeLocation = employeeLocation;
     }
 
     public StoreEmployees() {
@@ -66,5 +69,13 @@ public class StoreEmployees {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
+    }
+
+    public String getEmployeeLocation() {
+        return employeeLocation;
+    }
+
+    public void setEmployeeLocation(String employeeLocation) {
+        this.employeeLocation = employeeLocation;
     }
 }

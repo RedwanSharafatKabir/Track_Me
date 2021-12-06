@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.gpspayroll.track_me.ModelClasses.OfficeLocationInfo;
+import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
 import com.gpspayroll.track_me.R;
 
 import java.text.SimpleDateFormat;
@@ -31,9 +33,10 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
     private View view;
     private ConnectivityManager cm;
     private NetworkInfo netInfo;
-    private DatabaseReference databaseReference;
-    private String userPhone, timeNow, dateNow;
+    private DatabaseReference databaseReference, employeeReference;
     private TextView userName, currentDate, currentTime, confirmCheckIn;
+    private String userPhone, timeNow, dateNow, currentLocation="";
+    private String username, checkin, checkout, workhour, remuneration;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -42,11 +45,15 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
         view = inflater.inflate(R.layout.dialog_check_in, null);
         builder.setView(view).setCancelable(false);
 
+        Bundle mArgs = getArguments();
+        currentLocation = mArgs.getString("location_key");
+
         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
 
         userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         databaseReference = FirebaseDatabase.getInstance().getReference("Employee Info");
+        employeeReference = FirebaseDatabase.getInstance().getReference("Employees List");
 
         userName = view.findViewById(R.id.checkInUserNameId);
         currentTime = view.findViewById(R.id.checkInTimeId);
@@ -80,11 +87,29 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
             netInfo = cm.getActiveNetworkInfo();
 
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                checkin = timeNow;
+                checkout = "Counting";
+                workhour = "Counting";
+                remuneration = "Counting";
+
+                storeWorkStatus(username, checkin, checkout, workhour, remuneration, userPhone, currentLocation);
 
             } else {
                 Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void storeWorkStatus(String username, String checkin, String checkout, String workhour,
+                                 String remuneration, String userPhone, String employeeLocation) {
+
+        StoreEmployees storeEmployees = new StoreEmployees(username, checkin, checkout, workhour,
+                remuneration, userPhone, employeeLocation);
+
+        employeeReference.child(dateNow).child(userPhone).setValue(storeEmployees);
+
+        Toast.makeText(getActivity(), "Checked-in Successfully", Toast.LENGTH_SHORT).show();
+        getDialog().dismiss();
     }
 
     private void getUsername() {
