@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,9 @@ import java.util.Date;
 public class CheckInDialog extends AppCompatDialogFragment implements View.OnClickListener{
 
     private View view;
-    private ConnectivityManager cm;
     private NetworkInfo netInfo;
+    private ImageView closeDialog;
+    private ConnectivityManager cm;
     private DatabaseReference databaseReference, employeeReference;
     private TextView userName, currentDate, currentTime, confirmCheckIn;
     private String userPhone, timeNow, dateNow, currentLocation="";
@@ -60,6 +62,8 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
         currentDate = view.findViewById(R.id.checkInDateId);
         confirmCheckIn = view.findViewById(R.id.confirmCheckInId);
         confirmCheckIn.setOnClickListener(this);
+        closeDialog = view.findViewById(R.id.closeDialogInId);
+        closeDialog.setOnClickListener(this);
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             getUsername();
@@ -98,6 +102,10 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
                 Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
             }
         }
+
+        if(v.getId()==R.id.closeDialogInId){
+            getDialog().dismiss();
+        }
     }
 
     private void storeWorkStatus(String username, String checkin, String checkout, String workhour,
@@ -118,7 +126,9 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try {
-                        userName.setText(snapshot.getValue().toString());
+                        username = snapshot.getValue().toString();
+                        userName.setText(username);
+
                     } catch (Exception e){
                         Toast.makeText(getActivity(), "User Does Not Exist", Toast.LENGTH_SHORT).show();
                     }

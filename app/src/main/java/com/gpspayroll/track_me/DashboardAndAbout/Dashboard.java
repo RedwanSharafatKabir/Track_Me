@@ -75,26 +75,24 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     private Fragment fragment;
     private NetworkInfo netInfo;
     private ConnectivityManager cm;
-    private boolean checkInOut;
     private ProgressBar progressBar;
     private int PERMISSION_ID = 101;
     private FragmentTransaction fragmentTransaction;
     public static BackListenerFragment backBtnListener;
     private FusedLocationProviderClient mFusedLocationClient;
     private DatabaseReference databaseReference, employeeReference;
-    private CardView checkIn, checkOut, officeTimeline, employees, salaryHistory;
+    private CardView checkIn, officeTimeline, employees, salaryHistory;
     private String userRole, latitude = "", longitude = "", currentPlace = "";
-    private String adminPhone = "", temp = "", userPhone, dateNow;
+    private String adminPhone = "", userPhone, dateNow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         views = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         progressBar = views.findViewById(R.id.dashboardProgressId);
+        progressBar.setVisibility(View.GONE);
         checkIn = views.findViewById(R.id.checkInId);
         checkIn.setOnClickListener(this);
-        checkOut = views.findViewById(R.id.checkOutId);
-        checkOut.setOnClickListener(this);
         officeTimeline = views.findViewById(R.id.officecTimelineId);
         officeTimeline.setOnClickListener(this);
         employees = views.findViewById(R.id.employeesId);
@@ -115,7 +113,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                 salaryHistory.setVisibility(View.VISIBLE);
 
                 checkIn.setVisibility(View.GONE);
-                checkOut.setVisibility(View.GONE);
 
             } else if(userRole.equals("employeeS")){
                 employees.setVisibility(View.GONE);
@@ -123,7 +120,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
                 officeTimeline.setVisibility(View.VISIBLE);
                 checkIn.setVisibility(View.VISIBLE);
-                checkOut.setVisibility(View.VISIBLE);
             }
         } catch (Exception e){
             Log.i("Exception", e.getMessage());
@@ -137,9 +133,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            requestLocation();
-//            getLastLocation();
-            checkEmployeeValidLocation();
+            getLastLocation();
 
         } else {
             Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
@@ -149,7 +143,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     }
 
     // Provided by Akhter Vai
-/*
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
         if (checkPermissions()) {
@@ -167,9 +160,13 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                                     Log.wtf("lat", latitude);
                                     Log.wtf("lon", longitude);
 
-                                    getAdminPhone();
                                     currentPlace = getCompleteAddressString(getActivity(), location.getLatitude(), location.getLongitude());
-                                    storeOfficeLocation(adminPhone, latitude, longitude, currentPlace);
+
+                                    if(userRole.equals("adminS")){
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        getAdminPhone();
+                                        storeOfficeLocation(adminPhone, latitude, longitude, currentPlace);
+                                    }
                                 }
                             }
                         }
@@ -268,63 +265,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
         return strAdd;
     }
-*/
-
-    private void requestLocation() {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
-
-            getCurrentLocation();
-
-        } else {
-            getCurrentLocation();
-        }
-    }
-
-    private void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            requestLocation();
-        }
-
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-
-        String provider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        if(location!=null) {
-            try {
-                latitude = String.valueOf(location.getLatitude());
-                longitude = String.valueOf(location.getLongitude());
-            } catch (Exception e) {
-                Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
-
-            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-            List<Address> addressList;
-
-            try {
-                addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                currentPlace = addressList.get(0).getAddressLine(0);
-
-                getAdminPhone();
-                storeOfficeLocation(adminPhone, latitude, longitude, currentPlace);
-
-            } catch (IOException e) {
-                Log.i("ERROR ", "Permission Denied");
-            }
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -333,36 +273,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
             netInfo = cm.getActiveNetworkInfo();
 
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                if(checkInOut == true){
-                    Toast.makeText(getActivity(), "You Have Already Checked-in", Toast.LENGTH_LONG).show();
-                } else if(checkInOut == false){
-                    Bundle armgs = new Bundle();
-                    armgs.putString("location_key", currentPlace);
+                checkEmployeeValidLocation();
 
-                    CheckInDialog checkInDialog = new CheckInDialog();
-                    checkInDialog.setArguments(armgs);
-                    checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
-                }
-            } else {
-                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        if(v.getId()==R.id.checkOutId){
-            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            netInfo = cm.getActiveNetworkInfo();
-
-            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                if(checkInOut == true){
-                    Bundle armgs = new Bundle();
-                    armgs.putString("location_key", currentPlace);
-
-                    CheckOutDialog checkOutDialog = new CheckOutDialog();
-                    checkOutDialog.setArguments(armgs);
-                    checkOutDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
-                } else if(checkInOut == false){
-                    Toast.makeText(getActivity(), "You Have to Check-in First", Toast.LENGTH_LONG).show();
-                }
             } else {
                 Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
             }
@@ -398,6 +310,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     }
 
     private void checkEmployeeValidLocation(){
+        progressBar.setVisibility(View.VISIBLE);
+
         try {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -406,11 +320,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                         for (DataSnapshot item : snapshot.getChildren()) {
                             try {
                                 if(currentPlace.equals(item.child("placeName").getValue().toString())){
-                                    temp = item.child("placeName").getValue().toString();
-
-                                    if(currentPlace.equals(temp)){
-                                        confirmEmployeeStatus();
-                                    }
+                                    confirmEmployeeStatus();
                                 }
 
                             } catch (Exception e) {
@@ -425,7 +335,9 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
+                public void onCancelled(@NonNull DatabaseError error) {
+                    progressBar.setVisibility(View.GONE);
+                }
             });
         } catch (Exception e){
             Log.i("Exception", e.getMessage());
@@ -435,30 +347,53 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
     private void confirmEmployeeStatus(){
         userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-
         try{
             employeeReference.child(dateNow).child(userPhone).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     try {
                         if (userPhone.equals(snapshot.child("userPhone").getValue().toString())) {
-                            checkInOut = true;
                             progressBar.setVisibility(View.GONE);
+
+                            Bundle armgs = new Bundle();
+                            armgs.putString("location_key", currentPlace);
+
+                            CheckOutDialog checkOutDialog = new CheckOutDialog();
+                            checkOutDialog.setArguments(armgs);
+                            checkOutDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
                         }
 
                     } catch (Exception e){
-                        checkInOut = false;
                         progressBar.setVisibility(View.GONE);
+
+                        Bundle armgs = new Bundle();
+                        armgs.putString("location_key", currentPlace);
+
+                        CheckInDialog checkInDialog = new CheckInDialog();
+                        checkInDialog.setArguments(armgs);
+                        checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
                     }
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
+                public void onCancelled(@NonNull DatabaseError error) {
+                    try {
+                        progressBar.setVisibility(View.GONE);
+                    } catch (Exception e){
+                        Log.i("Db_Error", e.getMessage());
+                    }
+                }
             });
 
         } catch (Exception e){
-            checkInOut = false;
             progressBar.setVisibility(View.GONE);
+
+            Bundle armgs = new Bundle();
+            armgs.putString("location_key", currentPlace);
+
+            CheckInDialog checkInDialog = new CheckInDialog();
+            checkInDialog.setArguments(armgs);
+            checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
         }
     }
 
@@ -487,6 +422,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     private void storeOfficeLocation(String phoneNumber, String latitude, String longitude, String placeName){
         OfficeLocationInfo officeLocationInfo = new OfficeLocationInfo(latitude, longitude, placeName);
         databaseReference.child(phoneNumber).setValue(officeLocationInfo);
+        progressBar.setVisibility(View.GONE);
     }
 
     private void getAdminPhone(){

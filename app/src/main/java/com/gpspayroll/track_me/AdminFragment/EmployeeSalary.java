@@ -95,8 +95,10 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
                         storeEmployeesArrayList.clear();
 
                         for (DataSnapshot item : snapshot.getChildren()) {
-                            StoreEmployees storeEmployees = item.getValue(StoreEmployees.class);
-                            storeEmployeesArrayList.add(storeEmployees);
+                            for (DataSnapshot items : item.getChildren()) {
+                                StoreEmployees storeEmployees = items.getValue(StoreEmployees.class);
+                                storeEmployeesArrayList.add(storeEmployees);
+                            }
                         }
 
                         recyclerView.setAdapter(employeeListAdapter);

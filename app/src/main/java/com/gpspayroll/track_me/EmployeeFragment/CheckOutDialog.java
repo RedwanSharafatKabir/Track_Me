@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import java.util.Date;
 public class CheckOutDialog extends AppCompatDialogFragment implements View.OnClickListener{
 
     private View view;
+    private ImageView closeDialog;
     private ConnectivityManager cm;
     private NetworkInfo netInfo;
     private DatabaseReference databaseReference;
@@ -53,6 +55,8 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
         currentDate = view.findViewById(R.id.checkOutDateId);
         confirmCheckOut = view.findViewById(R.id.confirmCheckOutId);
         confirmCheckOut.setOnClickListener(this);
+        closeDialog = view.findViewById(R.id.closeDialogOutId);
+        closeDialog.setOnClickListener(this);
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             getUsername();
@@ -75,12 +79,18 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        netInfo = cm.getActiveNetworkInfo();
+        if(v.getId()==R.id.confirmCheckOutId){
+            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            netInfo = cm.getActiveNetworkInfo();
 
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-        } else {
-            Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            } else {
+                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if(v.getId()==R.id.closeDialogOutId){
+            getDialog().dismiss();
         }
     }
 
