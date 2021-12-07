@@ -95,8 +95,7 @@
                                 android:textSize="14sp"
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
-                                android:paddingLeft="10dp"
-                                android:layout_marginTop="5dp"/>
+                                android:paddingLeft="10dp"/>
 
                         </LinearLayout>
 
@@ -157,7 +156,6 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
-                                android:layout_marginTop="5dp"
                                 android:text="@string/work_hour"/>
 
                         </LinearLayout>
@@ -220,7 +218,6 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
-                                android:layout_marginTop="5dp"
                                 android:text="@string/total_employee"/>
 
                         </LinearLayout>
@@ -282,7 +279,6 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
-                                android:layout_marginTop="5dp"
                                 android:text="@string/weekend"/>
 
                         </LinearLayout>

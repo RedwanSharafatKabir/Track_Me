@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     private NetworkInfo netInfo;
     private ConnectivityManager cm;
     private ProgressBar progressBar;
+    private FrameLayout frameLayout;
     private int PERMISSION_ID = 101;
     private FragmentTransaction fragmentTransaction;
     public static BackListenerFragment backBtnListener;
@@ -89,6 +91,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         views = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        frameLayout = views.findViewById(R.id.checkinFrameId);
         progressBar = views.findViewById(R.id.dashboardProgressId);
         progressBar.setVisibility(View.GONE);
         checkIn = views.findViewById(R.id.checkInId);
@@ -112,14 +115,14 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                 employees.setVisibility(View.VISIBLE);
                 salaryHistory.setVisibility(View.VISIBLE);
 
-                checkIn.setVisibility(View.GONE);
+                frameLayout.setVisibility(View.GONE);
 
             } else if(userRole.equals("employeeS")){
                 employees.setVisibility(View.GONE);
                 salaryHistory.setVisibility(View.GONE);
 
                 officeTimeline.setVisibility(View.VISIBLE);
-                checkIn.setVisibility(View.VISIBLE);
+                frameLayout.setVisibility(View.VISIBLE);
             }
         } catch (Exception e){
             Log.i("Exception", e.getMessage());
@@ -300,12 +303,12 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         }
 
         if(v.getId()==R.id.salaryHistoryId){
-            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+//            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
 
 //            fragment = new SalaryHistory();
-            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentID, fragment);
-            fragmentTransaction.commit();
+//            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//            fragmentTransaction.replace(R.id.fragmentID, fragment);
+//            fragmentTransaction.commit();
         }
     }
 

@@ -84,6 +84,7 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
             netInfo = cm.getActiveNetworkInfo();
 
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                checkOutStatus();
             } else {
                 Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
             }
@@ -92,6 +93,12 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
         if(v.getId()==R.id.closeDialogOutId){
             getDialog().dismiss();
         }
+    }
+
+    private void checkOutStatus() {
+        // If checkOut time value in database is "Counting" then user will be checked out
+        // Other wise toast a message "You already left your office"
+
     }
 
     private void getUsername() {
