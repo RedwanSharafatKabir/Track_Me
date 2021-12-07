@@ -21,7 +21,10 @@ import com.gpspayroll.track_me.Authentication.LoginActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
 import com.gpspayroll.track_me.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapter.MyViewHolder> {
 
@@ -52,6 +55,9 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
         String workhour = storeEmployees.getWorkhour();
         String remuneration = storeEmployees.getRemuneration();
         String phone = storeEmployees.getUserPhone();
+        Date cal = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+        String date = simpleDateFormat1.format(cal);
 
         holder.nameText.setText(name);
         holder.checkinText.setText(checkin);
@@ -72,7 +78,7 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            databaseReference.child(phone).removeValue();
+                            databaseReference.child(date).child(phone).removeValue();
                             Toast.makeText(context, "Employee Removed", Toast.LENGTH_SHORT).show();
                         } catch (Exception e){
                             Log.i("Error_Db", e.getMessage());
