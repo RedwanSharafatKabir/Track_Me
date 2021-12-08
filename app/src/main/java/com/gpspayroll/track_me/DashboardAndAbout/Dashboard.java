@@ -324,6 +324,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                             try {
                                 if(currentPlace.equals(item.child("placeName").getValue().toString())){
                                     confirmEmployeeStatus();
+                                } else {
+                                    Toast.makeText(getActivity(), "You Did not Reach Office Yet", Toast.LENGTH_SHORT).show();
                                 }
 
                             } catch (Exception e) {

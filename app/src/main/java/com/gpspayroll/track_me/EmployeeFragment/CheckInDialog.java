@@ -71,7 +71,7 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
             Date cal = Calendar.getInstance().getTime();
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
             dateNow = simpleDateFormat1.format(cal);
-            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("hh:mm:ss aaa");
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("hh:mm aaa");
             timeNow = simpleDateFormat2.format(new Date());
 
             currentDate.setText(dateNow);
