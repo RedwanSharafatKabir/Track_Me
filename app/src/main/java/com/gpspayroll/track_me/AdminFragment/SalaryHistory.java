@@ -27,15 +27,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.Adapters.EmployeeListAdapter;
+import com.gpspayroll.track_me.Adapters.SalaryHistoryAdapter;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
 import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
+import com.gpspayroll.track_me.ModelClasses.StoreSalaryHistory;
 import com.gpspayroll.track_me.R;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class EmployeeSalary extends Fragment implements BackListenerFragment, View.OnClickListener {
+public class SalaryHistory extends Fragment implements BackListenerFragment, View.OnClickListener {
 
     private View views;
     public static BackListenerFragment backBtnListener;
@@ -46,22 +53,22 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
     private CardView backPage;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private ArrayList<StoreEmployees> storeEmployeesArrayList = new ArrayList<>();
-    private EmployeeListAdapter employeeListAdapter;
+    private ArrayList<StoreSalaryHistory> storeSalaryHistoryArrayList = new ArrayList<>();
+    private SalaryHistoryAdapter salaryHistoryAdapter;
     private DatabaseReference databaseReference;
     private Parcelable recyclerViewState;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        views = inflater.inflate(R.layout.fragment_employee_salary, container, false);
+        views = inflater.inflate(R.layout.fragment_salary_history, container, false);
 
-        progressBar = views.findViewById(R.id.employeeListProgressId);
-        backPage = views.findViewById(R.id.backFromEmployeeListId);
+        progressBar = views.findViewById(R.id.salaryHistoryProgressId);
+        backPage = views.findViewById(R.id.backFromSalaryHistoryId);
         backPage.setOnClickListener(this);
 
-        recyclerView = views.findViewById(R.id.employeesRecyclerViewId);
+        recyclerView = views.findViewById(R.id.salaryHistoryRecyclerViewId);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        employeeListAdapter = new EmployeeListAdapter(getContext(), storeEmployeesArrayList);
+        salaryHistoryAdapter = new SalaryHistoryAdapter(getContext(), storeSalaryHistoryArrayList);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -70,13 +77,13 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Employees List");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Payment History");
 
         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            getEmployeeList();
+            getHistory();
 
         } else {
             Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
@@ -85,23 +92,22 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
         return views;
     }
 
-    private void getEmployeeList() {
+    private void getHistory() {
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+
             try {
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        storeEmployeesArrayList.clear();
+                        storeSalaryHistoryArrayList.clear();
 
                         for (DataSnapshot item : snapshot.getChildren()) {
-                            for (DataSnapshot items : item.getChildren()) {
-                                StoreEmployees storeEmployees = items.getValue(StoreEmployees.class);
-                                storeEmployeesArrayList.add(storeEmployees);
-                            }
+                            StoreSalaryHistory storeSalaryHistory = item.getValue(StoreSalaryHistory.class);
+                            storeSalaryHistoryArrayList.add(storeSalaryHistory);
                         }
 
-                        recyclerView.setAdapter(employeeListAdapter);
-                        employeeListAdapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(salaryHistoryAdapter);
+                        salaryHistoryAdapter.notifyDataSetChanged();
                         recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
 
                         progressBar.setVisibility(View.GONE);
@@ -112,13 +118,11 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
                         progressBar.setVisibility(View.GONE);
                     }
                 });
-            } catch (Exception e){
+            } catch (Exception e) {
                 Log.i("Exception", e.getMessage());
                 progressBar.setVisibility(View.GONE);
             }
-        }
-
-        else {
+        } else {
             Toast.makeText(getActivity(), "Turn on internet connection", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
         }
@@ -126,13 +130,13 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
         refresh(1000);
     }
 
-    private void refresh(int milliSecond){
+    private void refresh(int milliSecond) {
         final Handler handler = new Handler(Looper.getMainLooper());
 
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                getEmployeeList();
+                getHistory();
             }
         };
 
@@ -141,7 +145,7 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.backFromEmployeeListId){
+        if (v.getId() == R.id.backFromSalaryHistoryId) {
             ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
 
             fragment = new Dashboard();

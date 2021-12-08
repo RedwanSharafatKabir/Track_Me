@@ -1,7 +1,8 @@
-package com.gpspayroll.track_me.AdminFragment;
+package com.gpspayroll.track_me.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.gpspayroll.track_me.Authentication.LoginActivity;
+import com.google.firebase.database.ValueEventListener;
+import com.gpspayroll.track_me.AdminFragment.Payroll;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
+import com.gpspayroll.track_me.ModelClasses.StoreSalaryHistory;
 import com.gpspayroll.track_me.R;
 
 import java.text.SimpleDateFormat;
@@ -26,38 +32,36 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapter.MyViewHolder> {
+public class SalaryHistoryAdapter extends RecyclerView.Adapter<SalaryHistoryAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<StoreEmployees> storeEmployeesList;
+    ArrayList<StoreSalaryHistory> storeSalaryHistoryList;
     DatabaseReference databaseReference;
 
-    public EmployeeListAdapter(Context c, ArrayList<StoreEmployees> p) {
+    public SalaryHistoryAdapter(Context c, ArrayList<StoreSalaryHistory> p) {
         context = c;
-        storeEmployeesList = p;
+        storeSalaryHistoryList = p;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.employee_list_adapter, parent, false);
+    public SalaryHistoryAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.salary_history_adapter, parent, false);
 
-        return new MyViewHolder(view);
+        return new SalaryHistoryAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EmployeeListAdapter.MyViewHolder holder, int position) {
-        StoreEmployees storeEmployees = storeEmployeesList.get(position);
+    public void onBindViewHolder(@NonNull SalaryHistoryAdapter.MyViewHolder holder, int position) {
+        StoreSalaryHistory storeSalaryHistory = storeSalaryHistoryList.get(position);
 
-        String name = storeEmployees.getUsername();
-        String checkin = storeEmployees.getCheckin();
-        String checkout = storeEmployees.getCheckout();
-        String workhour = storeEmployees.getWorkhour();
-        String remuneration = storeEmployees.getRemuneration();
-        String phone = storeEmployees.getUserPhone();
-        Date cal = Calendar.getInstance().getTime();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
-        String date = simpleDateFormat1.format(cal);
+        String name = storeSalaryHistory.getUsername();
+        String checkin = storeSalaryHistory.getCheckin();
+        String checkout = storeSalaryHistory.getCheckout();
+        String workhour = storeSalaryHistory.getWorkhour();
+        String remuneration = storeSalaryHistory.getRemuneration();
+        String phone = storeSalaryHistory.getUserPhone();
+        String status = storeSalaryHistory.getStatus();
 
         holder.nameText.setText(name);
         holder.checkinText.setText(checkin);
@@ -78,8 +82,9 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            databaseReference.child(date).child(phone).removeValue();
-                            Toast.makeText(context, "Employee Removed", Toast.LENGTH_SHORT).show();
+                            databaseReference.child(phone).removeValue();
+                            Toast.makeText(context, "Employee History Removed", Toast.LENGTH_SHORT).show();
+
                         } catch (Exception e){
                             Log.i("Error_Db", e.getMessage());
                         }
@@ -97,37 +102,28 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
                 alertDialog.show();
             }
         });
-
-        holder.payNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return storeEmployeesList.size();
+        return storeSalaryHistoryList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameText, checkinText, checkoutText, workhourText, remunerationText;
         ImageView deleteEmployee;
-        LinearLayout payNow;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            nameText = itemView.findViewById(R.id.employeeNameId);
-            checkinText = itemView.findViewById(R.id.checkInRecordId);
-            checkoutText = itemView.findViewById(R.id.checkOutRecordId);
-            workhourText = itemView.findViewById(R.id.workHourId);
-            remunerationText = itemView.findViewById(R.id.remunerationId);
+            nameText = itemView.findViewById(R.id.employeeNameHistoryId);
+            checkinText = itemView.findViewById(R.id.checkInRecordHistoryId);
+            checkoutText = itemView.findViewById(R.id.checkOutRecordHistoryId);
+            workhourText = itemView.findViewById(R.id.workHourHistoryId);
+            remunerationText = itemView.findViewById(R.id.remunerationHistoryId);
 
-            deleteEmployee = itemView.findViewById(R.id.deleteEmployeeId);
-            payNow = itemView.findViewById(R.id.payEmployeeId);
+            deleteEmployee = itemView.findViewById(R.id.deleteEmployeeHistoryId);
 
-            databaseReference = FirebaseDatabase.getInstance().getReference("Employees List");
+            databaseReference = FirebaseDatabase.getInstance().getReference("Payment History");
         }
     }
 }

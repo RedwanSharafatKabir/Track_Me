@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AdminFragment.OfficeTimeline"
+    tools:context=".AdminFragment.SalaryHistory"
     android:background="@color/lightPurpleBackground">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|left|top"
-        android:id="@+id/backFromEmployeeListId"
+        android:id="@+id/backFromSalaryHistoryId"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         app:cardCornerRadius="10dp"
@@ -32,13 +32,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginBottom="70dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/lightPurpleBackground">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Manage Employees"
+            android:text="Salary History"
             android:gravity="center"
             android:fontFamily="sans-serif"
             android:textSize="18sp"
@@ -47,7 +46,7 @@
             android:textStyle="bold"/>
 
         <ProgressBar
-            android:id="@+id/employeeListProgressId"
+            android:id="@+id/salaryHistoryProgressId"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -57,7 +56,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/employeesRecyclerViewId"
+            android:id="@+id/salaryHistoryRecyclerViewId"
             android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"

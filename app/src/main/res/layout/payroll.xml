@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/closeDialogPayrollId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_close_24"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/black_circle"
+            android:padding="0dp"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/payrollDetailsId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"/>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="8dp">
+
+        <TextView
+            android:id="@+id/confirmPayrollId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:background="@color/lightPurpleBackground"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/payrollProgressId"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"/>
+
+</LinearLayout>

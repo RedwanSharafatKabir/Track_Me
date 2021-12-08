@@ -174,6 +174,7 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
 
         progressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), "Successfully Checked-Out from Office", Toast.LENGTH_SHORT).show();
+        getDialog().dismiss();
     }
 
     private void getUsername() {

@@ -51,6 +51,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.AdminFragment.EmployeeSalary;
 import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
+import com.gpspayroll.track_me.AdminFragment.SalaryHistory;
 import com.gpspayroll.track_me.Authentication.SignupActivity;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.EmployeeFragment.CheckInDialog;
@@ -303,12 +304,12 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         }
 
         if(v.getId()==R.id.salaryHistoryId){
-//            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
 
-//            fragment = new SalaryHistory();
-//            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.fragmentID, fragment);
-//            fragmentTransaction.commit();
+            fragment = new SalaryHistory();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
         }
     }
 
@@ -326,6 +327,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                                     confirmEmployeeStatus();
                                 } else {
                                     Toast.makeText(getActivity(), "You Did not Reach Office Yet", Toast.LENGTH_SHORT).show();
+                                    getLastLocation();
+                                    progressBar.setVisibility(View.GONE);
                                 }
 
                             } catch (Exception e) {
