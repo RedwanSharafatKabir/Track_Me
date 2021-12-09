@@ -28,6 +28,7 @@
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_border.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_curved.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/green_border.xml" value="0.2942708333333333" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_checkout.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_delete_sweep_24.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.2942708333333333" />
@@ -38,19 +39,24 @@
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_outline_info_24.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_outline_person_24.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_outline_phone_24.xml" value="0.2942708333333333" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_outline_run_circle_24.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/white_curved_shape.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_map.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/dialog_check_in.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/dialog_check_out.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/employee_list_adapter.xml" value="0.25" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_about.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_dashboard.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_employee_list.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_employee_salary.xml" value="0.25" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_office_timeline.xml" value="0.25" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_on_field_employee.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_profile.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/fragment_salary_history.xml" value="0.278125" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/on_field_employee_list_adapter.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/payroll.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/salary_history_adapter.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/menu/activity_main_drawer.xml" value="0.278125" />

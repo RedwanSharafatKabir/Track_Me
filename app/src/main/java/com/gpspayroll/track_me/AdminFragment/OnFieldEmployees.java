@@ -1,6 +1,7 @@
 package com.gpspayroll.track_me.AdminFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -26,16 +27,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gpspayroll.track_me.Adapters.EmployeeListAdapter;
+import com.gpspayroll.track_me.Adapters.OnFieldEmployeeListAdapter;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
 import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
+import com.gpspayroll.track_me.Map.MapActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
 import com.gpspayroll.track_me.R;
 
 import java.util.ArrayList;
 
-public class EmployeeSalary extends Fragment implements BackListenerFragment, View.OnClickListener {
+public class OnFieldEmployees extends Fragment implements BackListenerFragment, View.OnClickListener {
 
     private View views;
     public static BackListenerFragment backBtnListener;
@@ -43,25 +45,27 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
     private FragmentTransaction fragmentTransaction;
     private NetworkInfo netInfo;
     private ConnectivityManager cm;
-    private CardView backPage;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+    private CardView backPage, employeeLocationOnMap;
     private ArrayList<StoreEmployees> storeEmployeesArrayList = new ArrayList<>();
-    private EmployeeListAdapter employeeListAdapter;
+    private OnFieldEmployeeListAdapter onFieldEmployeeListAdapter;
     private DatabaseReference databaseReference;
     private Parcelable recyclerViewState;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        views = inflater.inflate(R.layout.fragment_employee_salary, container, false);
+        views = inflater.inflate(R.layout.fragment_on_field_employee, container, false);
 
         progressBar = views.findViewById(R.id.employeeListProgressId);
         backPage = views.findViewById(R.id.backFromEmployeeListId);
         backPage.setOnClickListener(this);
+        employeeLocationOnMap = views.findViewById(R.id.seeEmployeeLocationId);
+        employeeLocationOnMap.setOnClickListener(this);
 
-        recyclerView = views.findViewById(R.id.employeesRecyclerViewId);
+        recyclerView = views.findViewById(R.id.employeesListRecyclerViewId);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        employeeListAdapter = new EmployeeListAdapter(getContext(), storeEmployeesArrayList);
+        onFieldEmployeeListAdapter = new OnFieldEmployeeListAdapter(getContext(), storeEmployeesArrayList);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -100,8 +104,8 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
                             }
                         }
 
-                        recyclerView.setAdapter(employeeListAdapter);
-                        employeeListAdapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(onFieldEmployeeListAdapter);
+                        onFieldEmployeeListAdapter.notifyDataSetChanged();
                         recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
 
                         progressBar.setVisibility(View.GONE);
@@ -148,6 +152,11 @@ public class EmployeeSalary extends Fragment implements BackListenerFragment, Vi
             fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentID, fragment, "EMPLOYEE_FRAGMENT");
             fragmentTransaction.commit();
+        }
+
+        if(v.getId()==R.id.seeEmployeeLocationId){
+            Intent intent = new Intent(getActivity(), MapActivity.class);
+            startActivity(intent);
         }
     }
 

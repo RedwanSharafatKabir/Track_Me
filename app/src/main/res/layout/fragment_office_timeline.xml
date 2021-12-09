@@ -16,26 +16,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:gravity="center">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/eub"
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/timeline"
+                android:padding="10dp"
                 android:layout_marginRight="5dp"/>
 
             <TextView
-                android:id="@+id/companyNameId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="European University of Bangladesh"
-                android:layout_marginLeft="5dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorPrimary"
+                android:text="Office Timeline"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="sans-serif"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 

@@ -8,9 +8,12 @@ public class StoreEmployees {
     private String remuneration;
     private String userPhone;
     private String employeeLocation;
+    private String lattitude;
+    private String longitude;
 
     public StoreEmployees(String username, String checkin, String checkout, String workhour,
-                          String remuneration, String userPhone, String employeeLocation) {
+                          String remuneration, String userPhone, String employeeLocation,
+                          String lattitude, String longitude) {
         this.username = username;
         this.checkin = checkin;
         this.checkout = checkout;
@@ -18,6 +21,8 @@ public class StoreEmployees {
         this.remuneration = remuneration;
         this.userPhone = userPhone;
         this.employeeLocation = employeeLocation;
+        this.lattitude = lattitude;
+        this.longitude = longitude;
     }
 
     public StoreEmployees() {
@@ -77,5 +82,21 @@ public class StoreEmployees {
 
     public void setEmployeeLocation(String employeeLocation) {
         this.employeeLocation = employeeLocation;
+    }
+
+    public String getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(String lattitude) {
+        this.lattitude = lattitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

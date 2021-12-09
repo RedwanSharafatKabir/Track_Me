@@ -1,13 +1,7 @@
 package com.gpspayroll.track_me.AdminFragment;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,13 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,11 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
 import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
+import com.gpspayroll.track_me.Map.MapActivity;
 import com.gpspayroll.track_me.R;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class OfficeTimeline  extends Fragment implements BackListenerFragment, View.OnClickListener {
 

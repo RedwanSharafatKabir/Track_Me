@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AdminFragment.OfficeTimeline"
+    tools:context=".AdminFragment.EmployeesList"
     android:background="@color/lightPurpleBackground">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|left|top"
-        android:id="@+id/backFromEmployeeListId"
+        android:id="@+id/backFromEmployeesId"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         app:cardCornerRadius="10dp"
@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Manage Employees"
+            android:text="All Employees"
             android:gravity="center"
             android:fontFamily="sans-serif"
             android:textSize="18sp"
@@ -47,7 +47,7 @@
             android:textStyle="bold"/>
 
         <ProgressBar
-            android:id="@+id/employeeListProgressId"
+            android:id="@+id/employeesProgressId"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"

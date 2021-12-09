@@ -19,15 +19,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/logo"
-                android:layout_marginTop="10dp"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -38,7 +29,8 @@
                 android:text="@string/app_name"
                 android:textColor="#000"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -72,9 +64,21 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="serif-monospace"
                 android:gravity="center"
-                android:text="Jasmin Akter"
+                android:text="Shraboni Afroz"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:text="Mobile: 01791017250\nEmail: samapti.afroza@gmail.com\nDesignation: Sr. Lecturer"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
@@ -107,7 +111,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif-monospace"
                 android:gravity="center"
-                android:text="Mili Akter\nID: 180322036"
+                android:text="Sourav Kundu\nID: 180222042"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -115,10 +119,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="serif-monospace"
                 android:gravity="center"
-                android:text="Asfaque Ahmed Bhuiyan\nID: 180322100"
+                android:text="Farid Hossain\nID: 180222047"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -126,22 +130,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:fontFamily="serif-monospace"
                 android:gravity="center"
-                android:text="Taslim Anwar\nID: 180222040"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:text="Tasfia Akter Dolon\nID: 180222059"
+                android:text="Md Abid Hasan\nID: 180222048"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -171,7 +163,7 @@
                 android:text="'European University of Bangladesh'"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="80dp"/>
 
         </LinearLayout>
 

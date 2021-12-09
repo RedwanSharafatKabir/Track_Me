@@ -33,14 +33,15 @@ import java.util.Date;
 public class CheckOutDialog extends AppCompatDialogFragment implements View.OnClickListener {
 
     private View view;
+    private int PER_HOUR_SALARY = 60;
     private ImageView closeDialog;
     private ConnectivityManager cm;
     private NetworkInfo netInfo;
     private ProgressBar progressBar;
-    private String userPhone, timeNow, dateNow, checkin="", workhour="";
-    private String employeeLocation="", remuneration="", username="";
     private DatabaseReference databaseReference, employeeStatusReference;
     private TextView userName, currentTime, confirmCheckOut, currentDate;
+    private String userPhone, timeNow, dateNow, checkin="", workhour="";
+    private String employeeLocation="", remuneration="", username="", lattitude="", longitude="";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -118,6 +119,8 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
                                 username = snapshot.child("username").getValue().toString();
                                 checkin = snapshot.child("checkin").getValue().toString();
                                 employeeLocation = snapshot.child("employeeLocation").getValue().toString();
+                                lattitude = snapshot.child("lattitude").getValue().toString();
+                                longitude = snapshot.child("longitude").getValue().toString();
 
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aaa");
                                 timeNow = simpleDateFormat.format(new Date());
@@ -132,10 +135,10 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
                                 hours = (hours < 0 ? -hours : hours);
 
                                 workhour = String.valueOf(hours);
-                                remuneration = String.valueOf(200*hours);
+                                remuneration = String.valueOf(PER_HOUR_SALARY*hours);
 
                                 storeUpdatedEmployeeStatusData(username, checkin, timeNow, workhour, remuneration,
-                                        userPhone, employeeLocation);
+                                        userPhone, employeeLocation, lattitude, longitude);
 
                             } else {
                                 progressBar.setVisibility(View.GONE);
@@ -165,10 +168,10 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
     }
 
     private void storeUpdatedEmployeeStatusData(String username, String checkin, String checkout, String workhour,
-                                                String remuneration, String userPhone, String employeeLocation) {
+                                                String remuneration, String userPhone, String employeeLocation, String lattitude, String longitude) {
 
         StoreEmployees storeEmployees = new StoreEmployees(username, checkin, checkout, workhour, remuneration,
-                userPhone, employeeLocation);
+                userPhone, employeeLocation, lattitude, longitude);
 
         employeeStatusReference.child(dateNow).child(userPhone).setValue(storeEmployees);
 

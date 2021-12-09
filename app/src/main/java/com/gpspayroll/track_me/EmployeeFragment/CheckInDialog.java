@@ -37,8 +37,8 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
     private ConnectivityManager cm;
     private DatabaseReference databaseReference, employeeReference;
     private TextView userName, currentDate, currentTime, confirmCheckIn;
-    private String userPhone, timeNow, dateNow, currentLocation="";
     private String username, checkin, checkout, workhour, remuneration;
+    private String userPhone, timeNow, dateNow, currentLocation="", lattitude="", longitude="";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
 
         Bundle mArgs = getArguments();
         currentLocation = mArgs.getString("location_key");
+        lattitude = mArgs.getString("latitude_key");
+        longitude = mArgs.getString("longitude_key");
 
         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
@@ -96,7 +98,7 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
                 workhour = "Counting";
                 remuneration = "Counting";
 
-                storeWorkStatus(username, checkin, checkout, workhour, remuneration, userPhone, currentLocation);
+                storeWorkStatus(username, checkin, checkout, workhour, remuneration, userPhone, currentLocation, lattitude, longitude);
 
             } else {
                 Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
@@ -109,10 +111,10 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
     }
 
     private void storeWorkStatus(String username, String checkin, String checkout, String workhour,
-                                 String remuneration, String userPhone, String employeeLocation) {
+                                 String remuneration, String userPhone, String employeeLocation, String lattitude, String longitude) {
 
         StoreEmployees storeEmployees = new StoreEmployees(username, checkin, checkout, workhour,
-                remuneration, userPhone, employeeLocation);
+                remuneration, userPhone, employeeLocation, lattitude, longitude);
 
         employeeReference.child(dateNow).child(userPhone).setValue(storeEmployees);
 

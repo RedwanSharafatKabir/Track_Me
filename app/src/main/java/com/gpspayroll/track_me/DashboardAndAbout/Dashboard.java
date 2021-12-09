@@ -6,10 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -42,22 +39,19 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gpspayroll.track_me.AdminFragment.EmployeeSalary;
+import com.gpspayroll.track_me.AdminFragment.EmployeesList;
+import com.gpspayroll.track_me.AdminFragment.OnFieldEmployees;
 import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
 import com.gpspayroll.track_me.AdminFragment.SalaryHistory;
-import com.gpspayroll.track_me.Authentication.SignupActivity;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.EmployeeFragment.CheckInDialog;
 import com.gpspayroll.track_me.EmployeeFragment.CheckOutDialog;
 import com.gpspayroll.track_me.ModelClasses.OfficeLocationInfo;
-import com.gpspayroll.track_me.ModelClasses.StoreEmployeeData;
 import com.gpspayroll.track_me.R;
 
 import java.io.BufferedReader;
@@ -84,7 +78,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     public static BackListenerFragment backBtnListener;
     private FusedLocationProviderClient mFusedLocationClient;
     private DatabaseReference databaseReference, employeeReference;
-    private CardView checkIn, officeTimeline, employees, salaryHistory;
+    private CardView checkIn, officeTimeline, employees, salaryHistory, onFieldEmployees;
     private String userRole, latitude = "", longitude = "", currentPlace = "";
     private String adminPhone = "", userPhone, dateNow;
 
@@ -103,6 +97,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         employees.setOnClickListener(this);
         salaryHistory = views.findViewById(R.id.salaryHistoryId);
         salaryHistory.setOnClickListener(this);
+        onFieldEmployees = views.findViewById(R.id.onFieldEmployeesId);
+        onFieldEmployees.setOnClickListener(this);
 
         Date cal = Calendar.getInstance().getTime();
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
@@ -115,12 +111,14 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                 officeTimeline.setVisibility(View.VISIBLE);
                 employees.setVisibility(View.VISIBLE);
                 salaryHistory.setVisibility(View.VISIBLE);
+                onFieldEmployees.setVisibility(View.VISIBLE);
 
                 frameLayout.setVisibility(View.GONE);
 
             } else if(userRole.equals("employeeS")){
                 employees.setVisibility(View.GONE);
                 salaryHistory.setVisibility(View.GONE);
+                onFieldEmployees.setVisibility(View.GONE);
 
                 officeTimeline.setVisibility(View.VISIBLE);
                 frameLayout.setVisibility(View.VISIBLE);
@@ -297,7 +295,16 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         if(v.getId()==R.id.employeesId){
             ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
 
-            fragment = new EmployeeSalary();
+            fragment = new EmployeesList();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
+        }
+
+        if(v.getId()==R.id.onFieldEmployeesId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new OnFieldEmployees();
             fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentID, fragment);
             fragmentTransaction.commit();
@@ -315,46 +322,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
     private void checkEmployeeValidLocation(){
         progressBar.setVisibility(View.VISIBLE);
-
-        try {
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    try {
-                        for (DataSnapshot item : snapshot.getChildren()) {
-                            try {
-                                if(currentPlace.equals(item.child("placeName").getValue().toString())){
-                                    confirmEmployeeStatus();
-                                } else {
-                                    Toast.makeText(getActivity(), "You Did not Reach Office Yet", Toast.LENGTH_SHORT).show();
-                                    getLastLocation();
-                                    progressBar.setVisibility(View.GONE);
-                                }
-
-                            } catch (Exception e) {
-                                Log.i("Exception", e.getMessage());
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }
-                    } catch (Exception e){
-                        Log.i("Exception", e.getMessage());
-                        progressBar.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    progressBar.setVisibility(View.GONE);
-                }
-            });
-        } catch (Exception e){
-            Log.i("Exception", e.getMessage());
-            progressBar.setVisibility(View.GONE);
-        }
-    }
-
-    private void confirmEmployeeStatus(){
         userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
         try{
             employeeReference.child(dateNow).child(userPhone).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -363,11 +332,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                         if (userPhone.equals(snapshot.child("userPhone").getValue().toString())) {
                             progressBar.setVisibility(View.GONE);
 
-                            Bundle armgs = new Bundle();
-                            armgs.putString("location_key", currentPlace);
-
                             CheckOutDialog checkOutDialog = new CheckOutDialog();
-                            checkOutDialog.setArguments(armgs);
                             checkOutDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
                         }
 
@@ -376,6 +341,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
                         Bundle armgs = new Bundle();
                         armgs.putString("location_key", currentPlace);
+                        armgs.putString("latitude_key", latitude);
+                        armgs.putString("longitude_key", longitude);
 
                         CheckInDialog checkInDialog = new CheckInDialog();
                         checkInDialog.setArguments(armgs);
@@ -398,6 +365,8 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
             Bundle armgs = new Bundle();
             armgs.putString("location_key", currentPlace);
+            armgs.putString("latitude_key", latitude);
+            armgs.putString("longitude_key", longitude);
 
             CheckInDialog checkInDialog = new CheckInDialog();
             checkInDialog.setArguments(armgs);

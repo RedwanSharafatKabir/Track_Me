@@ -10,13 +10,10 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.gpspayroll.track_me.AdminFragment.EmployeeSalary;
+import com.gpspayroll.track_me.AdminFragment.EmployeesList;
+import com.gpspayroll.track_me.AdminFragment.OnFieldEmployees;
 import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
 import com.gpspayroll.track_me.AdminFragment.SalaryHistory;
-import com.gpspayroll.track_me.DashboardAndAbout.AboutFragment;
-import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
 import com.gpspayroll.track_me.Profile.ProfileFragment;
 import com.gpspayroll.track_me.R;
 
@@ -129,8 +126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             ProfileFragment.backBtnListener.onBackPressed();
         }
 
-        if(EmployeeSalary.backBtnListener!=null){
-            EmployeeSalary.backBtnListener.onBackPressed();
+        if(OnFieldEmployees.backBtnListener!=null){
+            OnFieldEmployees.backBtnListener.onBackPressed();
         }
 
         if(OfficeTimeline.backBtnListener!=null){
@@ -139,6 +136,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
         if(SalaryHistory.backBtnListener!=null){
             SalaryHistory.backBtnListener.onBackPressed();
+        }
+
+        if(EmployeesList.backBtnListener!=null){
+            EmployeesList.backBtnListener.onBackPressed();
         }
     }
 }

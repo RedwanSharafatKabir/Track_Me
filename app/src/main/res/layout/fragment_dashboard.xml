@@ -7,45 +7,16 @@
     tools:context=".DashboardAndAbout.Dashboard"
     android:background="@color/lightPurpleBackground">
 
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:background="@color/colorAccent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginTop="70dp"
-            android:gravity="center">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/eub"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:id="@+id/companyNameId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="European University of Bangladesh"
-                android:layout_marginLeft="5dp"
-                android:textSize="16sp"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="210dp"
+        android:src="@drawable/wall"
+        android:scaleType="fitXY"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="165dp">
+        android:layout_marginTop="170dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +33,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -170,7 +141,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,6 +164,50 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
                         android:text="Employees"
+                        android:gravity="center|left"
+                        android:fontFamily="sans-serif"
+                        android:textSize="18sp"
+                        android:textColor="#000"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/onFieldEmployeesId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="#fff"
+                    android:weightSum="30"
+                    android:gravity="center|left">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="10"
+                        android:src="@drawable/ic_outline_run_circle_24"
+                        android:padding="15dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:text="On Field Employees"
                         android:gravity="center|left"
                         android:fontFamily="sans-serif"
                         android:textSize="18sp"
