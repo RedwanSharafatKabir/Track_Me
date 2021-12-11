@@ -117,72 +117,99 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
                         for (DataSnapshot items : snapshot.getChildren()) {
                             try {
                                 for (DataSnapshot item : items.getChildren()) {
-                                    // Get Lattitude
-                                    if(item.getKey().equals("lattitude")){
-                                        lattitude = item.getValue().toString();
+                                    if(item.getKey().equals("checkout")) {
+                                        if (item.getValue().toString().equals("Counting")) {
+                                            // Get Lattitude
+                                            databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    try {
+                                                        for (DataSnapshot items : snapshot.getChildren()) {
+                                                            try {
+                                                                for (DataSnapshot item : items.getChildren()) {
+                                                                    if (item.getKey().equals("lattitude")) {
+                                                                        lattitude = item.getValue().toString();
 
-                                        // Get Longitude
-                                        databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                try {
-                                                    for (DataSnapshot items : snapshot.getChildren()) {
-                                                        try {
-                                                            for (DataSnapshot item : items.getChildren()) {
-                                                                if(item.getKey().equals("longitude")){
-                                                                    longitude = item.getValue().toString();
+                                                                        // Get Longitude
+                                                                        databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
+                                                                            @Override
+                                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                try {
+                                                                                    for (DataSnapshot items : snapshot.getChildren()) {
+                                                                                        try {
+                                                                                            for (DataSnapshot item : items.getChildren()) {
+                                                                                                if (item.getKey().equals("longitude")) {
+                                                                                                    longitude = item.getValue().toString();
 
-                                                                    // Get UserName
-                                                                    databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
-                                                                        @Override
-                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                            try {
-                                                                                for (DataSnapshot items : snapshot.getChildren()) {
-                                                                                    try {
-                                                                                        for (DataSnapshot item : items.getChildren()) {
-                                                                                            if(item.getKey().equals("username")){
-                                                                                                employeeName = item.getValue().toString();
+                                                                                                    // Get UserName
+                                                                                                    databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
+                                                                                                        @Override
+                                                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                                                            try {
+                                                                                                                for (DataSnapshot items : snapshot.getChildren()) {
+                                                                                                                    try {
+                                                                                                                        for (DataSnapshot item : items.getChildren()) {
+                                                                                                                            if (item.getKey().equals("username")) {
+                                                                                                                                employeeName = item.getValue().toString();
 
-                                                                                                LatLng SearchlatLng = new LatLng(Double.parseDouble(lattitude), Double.parseDouble(longitude));
+                                                                                                                                LatLng SearchlatLng = new LatLng(Double.parseDouble(lattitude), Double.parseDouble(longitude));
 
-                                                                                                mGoogleMap.addMarker(new MarkerOptions().position(SearchlatLng)
-                                                                                                        .title(employeeName).icon(bitmapDescriptorFromVector(MapActivity.this,
-                                                                                                                R.drawable.lot_marker)));
-                                                                                                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SearchlatLng, zoomLevel));
+                                                                                                                                mGoogleMap.addMarker(new MarkerOptions().position(SearchlatLng)
+                                                                                                                                        .title(employeeName).icon(bitmapDescriptorFromVector(MapActivity.this,
+                                                                                                                                                R.drawable.lot_marker)));
+                                                                                                                                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SearchlatLng, zoomLevel));
+                                                                                                                            }
+                                                                                                                        }
+
+                                                                                                                    } catch (Exception e) {
+                                                                                                                        Log.i("TAG_Error", e.getMessage());
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            } catch (Exception e) {
+                                                                                                                Log.i("TAG_Error", e.getMessage());
+                                                                                                            }
+                                                                                                        }
+
+                                                                                                        @Override
+                                                                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                                                                            Log.i("Tag_DatabaseError", error.getMessage());
+                                                                                                        }
+                                                                                                    });
+                                                                                                }
                                                                                             }
+
+                                                                                        } catch (Exception e) {
+                                                                                            Log.i("TAG_Error", e.getMessage());
                                                                                         }
-
-                                                                                    } catch (Exception e){
-                                                                                        Log.i("TAG_Error", e.getMessage());
                                                                                     }
+                                                                                } catch (Exception e) {
+                                                                                    Log.i("TAG_Error", e.getMessage());
                                                                                 }
-                                                                            } catch (Exception e){
-                                                                                Log.i("TAG_Error", e.getMessage());
                                                                             }
-                                                                        }
 
-                                                                        @Override
-                                                                        public void onCancelled(@NonNull DatabaseError error) {
-                                                                            Log.i("Tag_DatabaseError", error.getMessage());
-                                                                        }
-                                                                    });
+                                                                            @Override
+                                                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                                                Log.i("Tag_DatabaseError", error.getMessage());
+                                                                            }
+                                                                        });
+                                                                    }
                                                                 }
+
+                                                            } catch (Exception e){
+                                                                Log.i("TAG_Error", e.getMessage());
                                                             }
-
-                                                        } catch (Exception e){
-                                                            Log.i("TAG_Error", e.getMessage());
                                                         }
+                                                    } catch (Exception e){
+                                                        Log.i("TAG_Error", e.getMessage());
                                                     }
-                                                } catch (Exception e){
-                                                    Log.i("TAG_Error", e.getMessage());
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                Log.i("Tag_DatabaseError", error.getMessage());
-                                            }
-                                        });
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+                                                    Log.i("Tag_DatabaseError", error.getMessage());
+                                                }
+                                            });
+                                        }
                                     }
                                 }
 
