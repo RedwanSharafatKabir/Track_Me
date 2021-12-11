@@ -13,14 +13,18 @@
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_main_admin.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_map.xml" value="0.209375" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.22" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/dialog_check_in.xml" value="0.33" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/dialog_check_out.xml" value="0.22" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_about.xml" value="0.209375" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_dashboard.xml" value="0.209375" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_dashboard_admin.xml" value="0.209375" />
-        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_office_timeline.xml" value="0.209375" />
-        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_profile.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_employee_list.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_office_timeline.xml" value="0.22" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_on_field_employee.xml" value="0.209375" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/fragment_salary_history.xml" value="0.209375" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/layout/reset_password.xml" value="0.209375" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/back_arrow.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/black_circle.xml" value="0.2942708333333333" />

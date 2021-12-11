@@ -31,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="70dp"
         android:layout_marginTop="20dp">
 
         <TextView
@@ -53,14 +52,28 @@
             android:indeterminate="true"
             android:layout_marginTop="20dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/salaryHistoryRecyclerViewId"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="70dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/salaryHistoryRecyclerViewId"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="10dp"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

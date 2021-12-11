@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Map.MapActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <fragment
+        android:id="@+id/mapID"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Map.MapActivity" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|left|top"
+        android:id="@+id/backFromMapId"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_keyboard_double_arrow_left_24"
+            android:background="@color/colorAccent"
+            android:padding="8dp" />
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

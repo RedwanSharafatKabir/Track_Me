@@ -29,11 +29,7 @@ import com.gpspayroll.track_me.R;
 public class OfficeTimeline  extends Fragment implements BackListenerFragment, View.OnClickListener {
 
     private View views;
-    private TextView curentLocation;
-    private NetworkInfo netInfo;
-    private ConnectivityManager cm;
     public static BackListenerFragment backBtnListener;
-    private DatabaseReference databaseReference;
     private Fragment fragment;
     private FragmentTransaction fragmentTransaction;
     private CardView backPage;
@@ -42,48 +38,10 @@ public class OfficeTimeline  extends Fragment implements BackListenerFragment, V
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         views = inflater.inflate(R.layout.fragment_office_timeline, container, false);
 
-        curentLocation = views.findViewById(R.id.officeLocationId);
         backPage = views.findViewById(R.id.backPageFloatingId);
         backPage.setOnClickListener(this);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Office Location");
-        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        netInfo = cm.getActiveNetworkInfo();
-
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            getOfficeLocation();
-
-        } else {
-            Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
         return views;
-    }
-
-    private void getOfficeLocation() {
-        try {
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    try {
-                        for (DataSnapshot item : snapshot.getChildren()) {
-                            try {
-                                curentLocation.setText(item.child("placeName").getValue().toString());
-                            } catch (Exception e) {
-                                Log.i("Exception", e.getMessage());
-                            }
-                        }
-                    } catch (Exception e){
-                        Log.i("Exception", e.getMessage());
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
-            });
-        } catch (Exception e){
-            Log.i("Exception", e.getMessage());
-        }
     }
 
     @Override

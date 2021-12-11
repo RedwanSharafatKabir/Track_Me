@@ -35,11 +35,15 @@ import com.gpspayroll.track_me.Map.MapActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
 import com.gpspayroll.track_me.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class OnFieldEmployees extends Fragment implements BackListenerFragment, View.OnClickListener {
 
     private View views;
+    private String dateNow;
     public static BackListenerFragment backBtnListener;
     private Fragment fragment;
     private FragmentTransaction fragmentTransaction;
@@ -56,6 +60,10 @@ public class OnFieldEmployees extends Fragment implements BackListenerFragment, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         views = inflater.inflate(R.layout.fragment_on_field_employee, container, false);
+
+        Date cal = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+        dateNow = simpleDateFormat1.format(cal);
 
         progressBar = views.findViewById(R.id.employeeListProgressId);
         backPage = views.findViewById(R.id.backFromEmployeeListId);
@@ -92,16 +100,13 @@ public class OnFieldEmployees extends Fragment implements BackListenerFragment, 
     private void getEmployeeList() {
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             try {
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         storeEmployeesArrayList.clear();
-
-                        for (DataSnapshot item : snapshot.getChildren()) {
-                            for (DataSnapshot items : item.getChildren()) {
-                                StoreEmployees storeEmployees = items.getValue(StoreEmployees.class);
-                                storeEmployeesArrayList.add(storeEmployees);
-                            }
+                        for (DataSnapshot items : snapshot.getChildren()) {
+                            StoreEmployees storeEmployees = items.getValue(StoreEmployees.class);
+                            storeEmployeesArrayList.add(storeEmployees);
                         }
 
                         recyclerView.setAdapter(onFieldEmployeeListAdapter);
@@ -157,6 +162,7 @@ public class OnFieldEmployees extends Fragment implements BackListenerFragment, 
         if(v.getId()==R.id.seeEmployeeLocationId){
             Intent intent = new Intent(getActivity(), MapActivity.class);
             startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     }
 

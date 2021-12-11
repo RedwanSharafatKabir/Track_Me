@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
     private View views;
     private Fragment fragment;
     public static BackListenerFragment backBtnListener;
-    private CardView resetPass, logout;
+    private CardView resetPass, logout, backFromProfile;
     private FragmentTransaction fragmentTransaction;
     private NetworkInfo netInfo;
     private ConnectivityManager cm;
@@ -63,6 +63,8 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
         resetPass.setOnClickListener(this);
         logout = views.findViewById(R.id.logoutId);
         logout.setOnClickListener(this);
+        backFromProfile = views.findViewById(R.id.backFromProfileId);
+        backFromProfile.setOnClickListener(this);
 
         phone = views.findViewById(R.id.userPhoneId);
         email = views.findViewById(R.id.userEmailId);
@@ -156,6 +158,15 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
 
         if(v.getId()==R.id.logoutId) {
             logoutApp();
+        }
+
+        if(v.getId()==R.id.backFromProfileId) {
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new Dashboard();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment, "EMPLOYEE_FRAGMENT");
+            fragmentTransaction.commit();
         }
     }
 

@@ -51,7 +51,6 @@ import com.gpspayroll.track_me.AdminFragment.SalaryHistory;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.EmployeeFragment.CheckInDialog;
 import com.gpspayroll.track_me.EmployeeFragment.CheckOutDialog;
-import com.gpspayroll.track_me.ModelClasses.OfficeLocationInfo;
 import com.gpspayroll.track_me.R;
 
 import java.io.BufferedReader;
@@ -74,13 +73,12 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     private ProgressBar progressBar;
     private FrameLayout frameLayout;
     private int PERMISSION_ID = 101;
+    private DatabaseReference employeeReference;
     private FragmentTransaction fragmentTransaction;
     public static BackListenerFragment backBtnListener;
     private FusedLocationProviderClient mFusedLocationClient;
-    private DatabaseReference databaseReference, employeeReference;
     private CardView checkIn, officeTimeline, employees, salaryHistory, onFieldEmployees;
-    private String userRole, latitude = "", longitude = "", currentPlace = "";
-    private String adminPhone = "", userPhone, dateNow;
+    private String userRole, latitude = "", longitude = "", currentPlace = "", userPhone, dateNow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,21 +128,195 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Office Location");
         employeeReference = FirebaseDatabase.getInstance().getReference("Employees List");
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            getLastLocation();
-
-        } else {
-            Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_SHORT).show();
-        }
 
         return views;
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.checkInId){
+            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            netInfo = cm.getActiveNetworkInfo();
+
+            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                checkEmployeeValidLocation();
+
+            } else {
+                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        // Admin
+        if(v.getId()==R.id.officecTimelineId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new OfficeTimeline();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
+        }
+
+        if(v.getId()==R.id.employeesId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new EmployeesList();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
+        }
+
+        if(v.getId()==R.id.onFieldEmployeesId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new OnFieldEmployees();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
+        }
+
+        if(v.getId()==R.id.salaryHistoryId){
+            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
+
+            fragment = new SalaryHistory();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentID, fragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    private void checkEmployeeValidLocation(){
+        progressBar.setVisibility(View.VISIBLE);
+        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+        try{
+            employeeReference.child(dateNow).child(userPhone).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
+                        if (userPhone.equals(snapshot.child("userPhone").getValue().toString())) {
+                            progressBar.setVisibility(View.GONE);
+
+                            CheckOutDialog checkOutDialog = new CheckOutDialog();
+                            checkOutDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+                        }
+
+                    } catch (Exception e){
+                        progressBar.setVisibility(View.GONE);
+
+                        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                        netInfo = cm.getActiveNetworkInfo();
+                        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                            getLastLocation();
+                            Bundle armgs = new Bundle();
+                            armgs.putString("location_key", currentPlace);
+                            armgs.putString("latitude_key", latitude);
+                            armgs.putString("longitude_key", longitude);
+
+                            CheckInDialog checkInDialog = new CheckInDialog();
+                            checkInDialog.setArguments(armgs);
+                            checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+
+                        } else {
+                            Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    try {
+                        progressBar.setVisibility(View.GONE);
+                    } catch (Exception e){
+                        Log.i("Db_Error", e.getMessage());
+                    }
+                }
+            });
+
+        } catch (Exception e){
+            progressBar.setVisibility(View.GONE);
+
+            getLastLocation();
+            Bundle armgs = new Bundle();
+            armgs.putString("location_key", currentPlace);
+            armgs.putString("latitude_key", latitude);
+            armgs.putString("longitude_key", longitude);
+
+            CheckInDialog checkInDialog = new CheckInDialog();
+            checkInDialog.setArguments(armgs);
+            checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+        }
+    }
+
+    private void gotUserMethod(){
+        try {
+            String recievedMessageTc;
+            FileInputStream fileInputStreamTc = getActivity().openFileInput("Users_Role.txt");
+            InputStreamReader inputStreamReaderTc = new InputStreamReader(fileInputStreamTc);
+            BufferedReader bufferedReaderTc = new BufferedReader(inputStreamReaderTc);
+            StringBuffer stringBufferTc = new StringBuffer();
+
+            while((recievedMessageTc = bufferedReaderTc.readLine())!=null){
+                stringBufferTc.append(recievedMessageTc);
+            }
+
+            userRole = stringBufferTc.toString();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Dashboard myFragment = (Dashboard)getActivity().getSupportFragmentManager().findFragmentByTag("EMPLOYEE_FRAGMENT");
+
+        if (myFragment != null && myFragment.isVisible()) {
+            AlertDialog.Builder alertDialogBuilder;
+            alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder.setTitle("EXIT !");
+            alertDialogBuilder.setMessage("Are you sure you want to close this app ?");
+            alertDialogBuilder.setIcon(R.drawable.exit);
+            alertDialogBuilder.setCancelable(false);
+
+            alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    getActivity().finish();
+                    getActivity().finishAffinity();
+                }
+            });
+
+            alertDialogBuilder.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        backBtnListener = this;
+    }
+
+    @Override
+    public void onPause() {
+        backBtnListener = null;
+        super.onPause();
+    }
+
     // Provided by Akhter Vai
+///*
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
         if (checkPermissions()) {
@@ -163,12 +335,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                                     Log.wtf("lon", longitude);
 
                                     currentPlace = getCompleteAddressString(getActivity(), location.getLatitude(), location.getLongitude());
-
-                                    if(userRole.equals("adminS")){
-                                        progressBar.setVisibility(View.VISIBLE);
-                                        getAdminPhone();
-                                        storeOfficeLocation(adminPhone, latitude, longitude, currentPlace);
-                                    }
                                 }
                             }
                         }
@@ -267,204 +433,5 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
         return strAdd;
     }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId()==R.id.checkInId){
-            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            netInfo = cm.getActiveNetworkInfo();
-
-            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                checkEmployeeValidLocation();
-
-            } else {
-                Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
-            }
-        }
-
-        // Admin
-        if(v.getId()==R.id.officecTimelineId){
-            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-
-            fragment = new OfficeTimeline();
-            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentID, fragment);
-            fragmentTransaction.commit();
-        }
-
-        if(v.getId()==R.id.employeesId){
-            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-
-            fragment = new EmployeesList();
-            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentID, fragment);
-            fragmentTransaction.commit();
-        }
-
-        if(v.getId()==R.id.onFieldEmployeesId){
-            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-
-            fragment = new OnFieldEmployees();
-            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentID, fragment);
-            fragmentTransaction.commit();
-        }
-
-        if(v.getId()==R.id.salaryHistoryId){
-            ((MainActivity) getActivity()).bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-
-            fragment = new SalaryHistory();
-            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentID, fragment);
-            fragmentTransaction.commit();
-        }
-    }
-
-    private void checkEmployeeValidLocation(){
-        progressBar.setVisibility(View.VISIBLE);
-        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-
-        try{
-            employeeReference.child(dateNow).child(userPhone).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    try {
-                        if (userPhone.equals(snapshot.child("userPhone").getValue().toString())) {
-                            progressBar.setVisibility(View.GONE);
-
-                            CheckOutDialog checkOutDialog = new CheckOutDialog();
-                            checkOutDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
-                        }
-
-                    } catch (Exception e){
-                        progressBar.setVisibility(View.GONE);
-
-                        Bundle armgs = new Bundle();
-                        armgs.putString("location_key", currentPlace);
-                        armgs.putString("latitude_key", latitude);
-                        armgs.putString("longitude_key", longitude);
-
-                        CheckInDialog checkInDialog = new CheckInDialog();
-                        checkInDialog.setArguments(armgs);
-                        checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    try {
-                        progressBar.setVisibility(View.GONE);
-                    } catch (Exception e){
-                        Log.i("Db_Error", e.getMessage());
-                    }
-                }
-            });
-
-        } catch (Exception e){
-            progressBar.setVisibility(View.GONE);
-
-            Bundle armgs = new Bundle();
-            armgs.putString("location_key", currentPlace);
-            armgs.putString("latitude_key", latitude);
-            armgs.putString("longitude_key", longitude);
-
-            CheckInDialog checkInDialog = new CheckInDialog();
-            checkInDialog.setArguments(armgs);
-            checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
-        }
-    }
-
-    private void gotUserMethod(){
-        try {
-            String recievedMessageTc;
-            FileInputStream fileInputStreamTc = getActivity().openFileInput("Users_Role.txt");
-            InputStreamReader inputStreamReaderTc = new InputStreamReader(fileInputStreamTc);
-            BufferedReader bufferedReaderTc = new BufferedReader(inputStreamReaderTc);
-            StringBuffer stringBufferTc = new StringBuffer();
-
-            while((recievedMessageTc = bufferedReaderTc.readLine())!=null){
-                stringBufferTc.append(recievedMessageTc);
-            }
-
-            userRole = stringBufferTc.toString();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void storeOfficeLocation(String phoneNumber, String latitude, String longitude, String placeName){
-        OfficeLocationInfo officeLocationInfo = new OfficeLocationInfo(latitude, longitude, placeName);
-        databaseReference.child(phoneNumber).setValue(officeLocationInfo);
-        progressBar.setVisibility(View.GONE);
-    }
-
-    private void getAdminPhone(){
-        try {
-            String recievedMessageTc;
-            FileInputStream fileInputStreamTc = getActivity().openFileInput("Admin_Phone.txt");
-            InputStreamReader inputStreamReaderTc = new InputStreamReader(fileInputStreamTc);
-            BufferedReader bufferedReaderTc = new BufferedReader(inputStreamReaderTc);
-            StringBuffer stringBufferTc = new StringBuffer();
-
-            while((recievedMessageTc = bufferedReaderTc.readLine())!=null){
-                stringBufferTc.append(recievedMessageTc);
-            }
-
-            adminPhone = stringBufferTc.toString();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Dashboard myFragment = (Dashboard)getActivity().getSupportFragmentManager().findFragmentByTag("EMPLOYEE_FRAGMENT");
-
-        if (myFragment != null && myFragment.isVisible()) {
-            AlertDialog.Builder alertDialogBuilder;
-            alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setTitle("EXIT !");
-            alertDialogBuilder.setMessage("Are you sure you want to close this app ?");
-            alertDialogBuilder.setIcon(R.drawable.exit);
-            alertDialogBuilder.setCancelable(false);
-
-            alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    getActivity().finish();
-                    getActivity().finishAffinity();
-                }
-            });
-
-            alertDialogBuilder.setNeutralButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        backBtnListener = this;
-    }
-
-    @Override
-    public void onPause() {
-        backBtnListener = null;
-        super.onPause();
-    }
+//*/
 }

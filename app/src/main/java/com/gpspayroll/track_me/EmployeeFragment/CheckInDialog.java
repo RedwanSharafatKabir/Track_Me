@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gpspayroll.track_me.ModelClasses.OfficeLocationInfo;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
 import com.gpspayroll.track_me.R;
 

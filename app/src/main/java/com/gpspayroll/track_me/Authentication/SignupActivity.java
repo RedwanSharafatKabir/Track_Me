@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -137,11 +138,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
                     signupWithEmail(email, username, phone, password);
 
-                    signupEmailText.setText("");
-                    signupUsernameText.setText("");
-                    signupPhoneText.setText("");
-                    signupPasswordText.setText("");
-
                 } else {
                     waitingDialog.dismiss();
                     Snackbar snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
@@ -169,13 +165,19 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                             if (task.isSuccessful()) {
                                 rememberMethod("I_User");
 
+                                signupEmailText.setText("");
+                                signupUsernameText.setText("");
+                                signupPhoneText.setText("");
+                                signupPasswordText.setText("");
+
                                 finish();
                                 Intent it = new Intent(SignupActivity.this, LoginActivity.class);
                                 startActivity(it);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
                             } else {
                                 waitingDialog.dismiss();
+                                Log.i("Signup_Exception", task.getException().getMessage());
                                 Toast t = Toast.makeText(getApplicationContext(), "Authentication failed\nError : " +
                                         task.getException().getMessage(), Toast.LENGTH_LONG);
                                 t.setGravity(Gravity.CENTER, 0, 0);
@@ -190,8 +192,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         Toast t = Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG);
                         t.setGravity(Gravity.CENTER, 0, 0);
                         t.show();
+
                     } else {
                         waitingDialog.dismiss();
+                        Log.i("Signup_Exception", task.getException().getMessage());
                         Toast t = Toast.makeText(getApplicationContext(), "Authentication failed. Error : "
                                 + "Connection lost.", Toast.LENGTH_LONG);
                         t.setGravity(Gravity.CENTER, 0, 0);

@@ -121,8 +121,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             else {
+                cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                netInfo = cm.getActiveNetworkInfo();
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
                     // Access Employee Email
+
                     try {
                         employeeReference.child(phone).child("userEmail").addValueEventListener(new ValueEventListener() {
                             @Override
@@ -260,26 +263,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 } catch (Exception e) {
                                                     waitingDialog.dismiss();
                                                     Toast.makeText(LoginActivity.this, "User Not Registered", Toast.LENGTH_SHORT).show();
+                                                    Log.i("DB_Error", e.getMessage());
                                                 }
                                             }
 
                                             @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {}
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                waitingDialog.dismiss();
+                                                Log.i("DB_Error", error.getMessage());
+                                            }
                                         });
 
                                     } catch (Exception exception) {
                                         waitingDialog.dismiss();
                                         Toast.makeText(LoginActivity.this, "User Not Registered", Toast.LENGTH_SHORT).show();
+                                        Log.i("DB_Error", exception.getMessage());
                                     }
                                 }
                             }
 
                             @Override
-                            public void onCancelled(@NonNull DatabaseError error) {}
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                waitingDialog.dismiss();
+                                Log.i("DB_Error", error.getMessage());
+                            }
                         });
 
                     } catch (Exception e){
                         Log.i("DB_Error", e.getMessage());
+                        waitingDialog.dismiss();
                     }
 
                 } else {

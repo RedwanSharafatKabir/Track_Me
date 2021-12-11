@@ -1,42 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AdminFragment.EmployeesList"
-    android:background="@color/lightPurpleBackground">
+    android:background="@color/lightPurpleBackground"
+    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|left|top"
-        android:id="@+id/backFromEmployeesId"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
+        android:orientation="horizontal">
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_keyboard_double_arrow_left_24"
-            android:background="@color/colorAccent"
-            android:padding="8dp" />
+            android:layout_gravity="center|left|top"
+            android:id="@+id/backFromEmployeesId"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_keyboard_double_arrow_left_24"
+                android:background="@color/colorAccent"
+                android:padding="8dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginBottom="70dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/lightPurpleBackground">
+        </androidx.cardview.widget.CardView>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All Employees"
             android:gravity="center"
@@ -46,23 +44,37 @@
             android:layout_gravity="center"
             android:textStyle="bold"/>
 
-        <ProgressBar
-            android:id="@+id/employeesProgressId"
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/employeesProgressId"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="70dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:indeterminate="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/lightPurpleBackground">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/employeesRecyclerViewId"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/employeesRecyclerViewId"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
-</FrameLayout>
+    </ScrollView>
+
+</LinearLayout>
