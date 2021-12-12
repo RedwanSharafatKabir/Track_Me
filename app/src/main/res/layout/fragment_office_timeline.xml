@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AdminFragment.OfficeTimeline"
+    tools:context=".AdminFragment.OfficeTimelineActivities.OfficeTimeline"
     android:background="@color/lightPurpleBackground">
 
     <LinearLayout
@@ -49,6 +49,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/workEnvironmentId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
@@ -94,7 +95,7 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
-                                android:text="Remote Work"/>
+                                android:text="@string/work_environment"/>
 
                         </LinearLayout>
 
@@ -110,6 +111,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/workHourTextId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
@@ -171,7 +173,6 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/checkInId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
@@ -209,6 +210,7 @@
                                 android:paddingLeft="10dp"/>
 
                             <TextView
+                                android:id="@+id/totalEmployeesTextId"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center|left"
@@ -216,8 +218,7 @@
                                 android:textSize="14sp"
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
-                                android:paddingLeft="10dp"
-                                android:text="@string/total_employee"/>
+                                android:paddingLeft="10dp"/>
 
                         </LinearLayout>
 
@@ -233,6 +234,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/weekendId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"

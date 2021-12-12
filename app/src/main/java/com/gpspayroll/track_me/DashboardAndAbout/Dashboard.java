@@ -46,7 +46,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.AdminFragment.EmployeesList;
 import com.gpspayroll.track_me.AdminFragment.OnFieldEmployees;
-import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
+import com.gpspayroll.track_me.AdminFragment.OfficeTimelineActivities.OfficeTimeline;
 import com.gpspayroll.track_me.AdminFragment.SalaryHistory;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
 import com.gpspayroll.track_me.EmployeeFragment.CheckInDialog;
@@ -207,16 +207,9 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
                         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                         netInfo = cm.getActiveNetworkInfo();
+
                         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
                             getLastLocation();
-                            Bundle armgs = new Bundle();
-                            armgs.putString("location_key", currentPlace);
-                            armgs.putString("latitude_key", latitude);
-                            armgs.putString("longitude_key", longitude);
-
-                            CheckInDialog checkInDialog = new CheckInDialog();
-                            checkInDialog.setArguments(armgs);
-                            checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
 
                         } else {
                             Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
@@ -236,16 +229,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
         } catch (Exception e){
             progressBar.setVisibility(View.GONE);
-
             getLastLocation();
-            Bundle armgs = new Bundle();
-            armgs.putString("location_key", currentPlace);
-            armgs.putString("latitude_key", latitude);
-            armgs.putString("longitude_key", longitude);
-
-            CheckInDialog checkInDialog = new CheckInDialog();
-            checkInDialog.setArguments(armgs);
-            checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
         }
     }
 
@@ -315,7 +299,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
         super.onPause();
     }
 
-    // Provided by Akhter Vai
+    // Map Location
 ///*
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
@@ -335,6 +319,15 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
                                     Log.wtf("lon", longitude);
 
                                     currentPlace = getCompleteAddressString(getActivity(), location.getLatitude(), location.getLongitude());
+
+                                    Bundle armgs = new Bundle();
+                                    armgs.putString("location_key", currentPlace);
+                                    armgs.putString("latitude_key", latitude);
+                                    armgs.putString("longitude_key", longitude);
+
+                                    CheckInDialog checkInDialog = new CheckInDialog();
+                                    checkInDialog.setArguments(armgs);
+                                    checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
                                 }
                             }
                         }

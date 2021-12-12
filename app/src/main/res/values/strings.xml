@@ -3,8 +3,10 @@
     <string name="Sign_Up_Text"><u>Sign Up</u></string>
     <string name="Login_Text"><u>Login</u></string>
 
-    <string name="work_hour">5 days a week.\n[ 10:00 AM to 6:00 PM ]</string>
-    <string name="total_employee">About 400+ Hardworking and Co-operative Employees</string>
-    <string name="weekend">Friday to Saturday +\nYearly company tour</string>
+    <string name="work_environment">We believe in the simple principle that creative work requires a special kind of work culture.\n\nWe are very careful to maintain a culture that helps attract talented people and helps them achieve their best performance.\n\nThis culture starts from work place structure to operating principles of the development teams.</string>
+
+    <string name="work_hour">* 5 days a week. From Sunday to Thursday\n\n* Physical Office period: [ 10:00 AM to 6:00 PM ]\n\n* Remote Office period: [ Anytime in a day ]</string>
+
+    <string name="weekend">Two days a week: Friday and Saturday. Yearly company tour sponsored by office authority.</string>
 
 </resources>

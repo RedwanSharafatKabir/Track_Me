@@ -41,6 +41,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -55,6 +56,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -73,6 +75,9 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
     private SupportMapFragment supportMapFragment;
     private String dateNow, lattitude="", longitude="", employeeName="";
     private FusedLocationProviderClient mFusedLocationClient;
+    public static List<Double> latList = new ArrayList<>();
+    public static List<Double> longList = new ArrayList<>();
+    public static List<String> nameList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,112 +118,41 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
             databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    try {
-                        for (DataSnapshot items : snapshot.getChildren()) {
-                            try {
-                                for (DataSnapshot item : items.getChildren()) {
-                                    if(item.getKey().equals("checkout")) {
-                                        if (item.getValue().toString().equals("Counting")) {
-                                            // Get Lattitude
-                                            databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    try {
-                                                        for (DataSnapshot items : snapshot.getChildren()) {
-                                                            try {
-                                                                for (DataSnapshot item : items.getChildren()) {
-                                                                    if (item.getKey().equals("lattitude")) {
-                                                                        lattitude = item.getValue().toString();
+                    latList.clear();
+                    longList.clear();
+                    nameList.clear();
 
-                                                                        // Get Longitude
-                                                                        databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
-                                                                            @Override
-                                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                                try {
-                                                                                    for (DataSnapshot items : snapshot.getChildren()) {
-                                                                                        try {
-                                                                                            for (DataSnapshot item : items.getChildren()) {
-                                                                                                if (item.getKey().equals("longitude")) {
-                                                                                                    longitude = item.getValue().toString();
+                    for (DataSnapshot items : snapshot.getChildren()) {
+                        for (DataSnapshot item : items.getChildren()) {
+                            if (item.getKey().equals("lattitude")) {
+                                latList.add(Double.parseDouble(item.getValue().toString()));
+                            }
 
-                                                                                                    // Get UserName
-                                                                                                    databaseReference.child(dateNow).addValueEventListener(new ValueEventListener() {
-                                                                                                        @Override
-                                                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                                                            try {
-                                                                                                                for (DataSnapshot items : snapshot.getChildren()) {
-                                                                                                                    try {
-                                                                                                                        for (DataSnapshot item : items.getChildren()) {
-                                                                                                                            if (item.getKey().equals("username")) {
-                                                                                                                                employeeName = item.getValue().toString();
+                            if (item.getKey().equals("longitude")) {
+                                longList.add(Double.parseDouble(item.getValue().toString()));
+                            }
 
-                                                                                                                                LatLng SearchlatLng = new LatLng(Double.parseDouble(lattitude), Double.parseDouble(longitude));
-
-                                                                                                                                mGoogleMap.addMarker(new MarkerOptions().position(SearchlatLng)
-                                                                                                                                        .title(employeeName).icon(bitmapDescriptorFromVector(MapActivity.this,
-                                                                                                                                                R.drawable.lot_marker)));
-                                                                                                                                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(SearchlatLng, zoomLevel));
-                                                                                                                            }
-                                                                                                                        }
-
-                                                                                                                    } catch (Exception e) {
-                                                                                                                        Log.i("TAG_Error", e.getMessage());
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            } catch (Exception e) {
-                                                                                                                Log.i("TAG_Error", e.getMessage());
-                                                                                                            }
-                                                                                                        }
-
-                                                                                                        @Override
-                                                                                                        public void onCancelled(@NonNull DatabaseError error) {
-                                                                                                            Log.i("Tag_DatabaseError", error.getMessage());
-                                                                                                        }
-                                                                                                    });
-                                                                                                }
-                                                                                            }
-
-                                                                                        } catch (Exception e) {
-                                                                                            Log.i("TAG_Error", e.getMessage());
-                                                                                        }
-                                                                                    }
-                                                                                } catch (Exception e) {
-                                                                                    Log.i("TAG_Error", e.getMessage());
-                                                                                }
-                                                                            }
-
-                                                                            @Override
-                                                                            public void onCancelled(@NonNull DatabaseError error) {
-                                                                                Log.i("Tag_DatabaseError", error.getMessage());
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                }
-
-                                                            } catch (Exception e){
-                                                                Log.i("TAG_Error", e.getMessage());
-                                                            }
-                                                        }
-                                                    } catch (Exception e){
-                                                        Log.i("TAG_Error", e.getMessage());
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-                                                    Log.i("Tag_DatabaseError", error.getMessage());
-                                                }
-                                            });
-                                        }
-                                    }
-                                }
-
-                            } catch (Exception e){
-                                Log.i("TAG_Error", e.getMessage());
+                            if (item.getKey().equals("username")) {
+                                nameList.add(item.getValue().toString());
                             }
                         }
-                    } catch (Exception e){
-                        Log.i("TAG_Error", e.getMessage());
+                    }
+
+                    int i=0, j=0;
+                    List<LatLng> placeList = new ArrayList<>();
+
+                    for(i=0; i<latList.size(); i++){
+                        LatLng placeName = new LatLng(latList.get(i), longList.get(i));
+                        placeList.add(placeName);
+                    }
+
+                    for(i=0; i<placeList.size(); i++){
+                        if(j==i){
+                            mGoogleMap.addMarker(new MarkerOptions().position(placeList.get(i)).title(nameList.get(j))
+                                    .icon(bitmapDescriptorFromVector(MapActivity.this, R.drawable.lot_marker)));
+                        } j++;
+
+                        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeList.get(i), zoomLevel));
                     }
                 }
 

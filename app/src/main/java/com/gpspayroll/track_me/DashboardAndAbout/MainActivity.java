@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.gpspayroll.track_me.AdminFragment.EmployeesList;
 import com.gpspayroll.track_me.AdminFragment.OnFieldEmployees;
-import com.gpspayroll.track_me.AdminFragment.OfficeTimeline;
+import com.gpspayroll.track_me.AdminFragment.OfficeTimelineActivities.OfficeTimeline;
 import com.gpspayroll.track_me.AdminFragment.SalaryHistory;
 import com.gpspayroll.track_me.Profile.ProfileFragment;
 import com.gpspayroll.track_me.R;
