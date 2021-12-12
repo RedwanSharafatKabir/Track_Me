@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".SplashAndDashboard.SplashScreen">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        app:riv_corner_radius="35dp"
+        android:padding="10dp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="EUB"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:background="@drawable/blue_border_rectangle"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="APGT"
+            android:textColor="#fff"
+            android:background="@drawable/blue_rectangle"
+            android:textSize="25sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold|italic"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="This is an Automated GPS Tracking and Payroll System"
+        android:textColor="@color/GreyBlack"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/getStartedFloatingId"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="30dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_24"
+            android:background="@color/colorAccent"
+            android:text="Get Started "
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:paddingRight="15dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

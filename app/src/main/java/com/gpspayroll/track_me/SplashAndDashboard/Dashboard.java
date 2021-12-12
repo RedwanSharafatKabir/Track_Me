@@ -1,4 +1,4 @@
-package com.gpspayroll.track_me.DashboardAndAbout;
+package com.gpspayroll.track_me.SplashAndDashboard;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -204,16 +204,7 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
                     } catch (Exception e){
                         progressBar.setVisibility(View.GONE);
-
-                        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                        netInfo = cm.getActiveNetworkInfo();
-
-                        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                            getLastLocation();
-
-                        } else {
-                            Toast.makeText(getActivity(), "Turn On Internet Connection", Toast.LENGTH_LONG).show();
-                        }
+                        getLastLocation();
                     }
                 }
 

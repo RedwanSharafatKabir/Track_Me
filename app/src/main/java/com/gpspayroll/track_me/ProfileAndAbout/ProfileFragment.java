@@ -1,4 +1,4 @@
-package com.gpspayroll.track_me.Profile;
+package com.gpspayroll.track_me.ProfileAndAbout;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -45,8 +45,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gpspayroll.track_me.Authentication.LoginActivity;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
-import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
-import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
+import com.gpspayroll.track_me.SplashAndDashboard.MainActivity;
+import com.gpspayroll.track_me.SplashAndDashboard.Dashboard;
 import com.gpspayroll.track_me.ModelClasses.StoreUserImageUrlData;
 import com.gpspayroll.track_me.R;
 import com.squareup.picasso.Picasso;

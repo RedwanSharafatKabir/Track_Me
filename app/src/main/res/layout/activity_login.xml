@@ -12,16 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:src="@drawable/logo"
-            app:riv_corner_radius="35dp"
-            android:layout_marginTop="30dp"
-            android:padding="10dp"
-            android:layout_gravity="center"/>
+        android:orientation="vertical"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"

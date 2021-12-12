@@ -1,4 +1,4 @@
-package com.gpspayroll.track_me.Profile;
+package com.gpspayroll.track_me.ProfileAndAbout;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -23,13 +23,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.gpspayroll.track_me.R;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class ResetPassword extends AppCompatDialogFragment implements View.OnClickListener {
 

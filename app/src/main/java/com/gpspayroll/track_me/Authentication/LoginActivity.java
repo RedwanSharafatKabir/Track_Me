@@ -29,7 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
+import com.gpspayroll.track_me.SplashAndDashboard.MainActivity;
 import com.gpspayroll.track_me.R;
 
 import java.io.BufferedReader;

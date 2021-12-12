@@ -85,6 +85,7 @@ public class OnFieldEmployeeListAdapter extends RecyclerView.Adapter<OnFieldEmpl
                         try {
                             databaseReference.child(date).child(phone).removeValue();
                             Toast.makeText(context, "Employee Removed", Toast.LENGTH_SHORT).show();
+
                         } catch (Exception e){
                             Log.i("Error_Db", e.getMessage());
                         }

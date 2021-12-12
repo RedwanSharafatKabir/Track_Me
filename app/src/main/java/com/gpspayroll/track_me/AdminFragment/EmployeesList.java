@@ -25,12 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.Adapters.EmployeeListAdapter;
-import com.gpspayroll.track_me.Adapters.OnFieldEmployeeListAdapter;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
-import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
-import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
+import com.gpspayroll.track_me.SplashAndDashboard.Dashboard;
+import com.gpspayroll.track_me.SplashAndDashboard.MainActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployeeData;
-import com.gpspayroll.track_me.ModelClasses.StoreEmployees;
 import com.gpspayroll.track_me.R;
 import java.util.ArrayList;
 

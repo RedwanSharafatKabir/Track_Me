@@ -30,7 +30,9 @@
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/black_circle.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_blur_background.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_border.xml" value="0.2942708333333333" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_border_rectangle.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_curved.xml" value="0.2942708333333333" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/blue_rectangle.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/green_border.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/drawable/ic_baseline_checkout.xml" value="0.2942708333333333" />
@@ -49,6 +51,7 @@
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_map.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/activity_splash_screen.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/dialog_check_in.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/dialog_check_out.xml" value="0.278125" />
         <entry key="..\:/Users/USER/Desktop/Track_Me/app/src/main/res/layout/employee_list_adapter.xml" value="0.25" />

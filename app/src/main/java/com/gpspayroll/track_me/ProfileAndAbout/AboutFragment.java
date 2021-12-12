@@ -1,4 +1,4 @@
-package com.gpspayroll.track_me.DashboardAndAbout;
+package com.gpspayroll.track_me.ProfileAndAbout;
 
 import android.os.Bundle;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
+import com.gpspayroll.track_me.SplashAndDashboard.Dashboard;
+import com.gpspayroll.track_me.SplashAndDashboard.MainActivity;
 import com.gpspayroll.track_me.R;
 
 public class AboutFragment extends Fragment implements BackListenerFragment {

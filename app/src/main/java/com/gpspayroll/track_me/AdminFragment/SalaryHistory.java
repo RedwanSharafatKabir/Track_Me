@@ -28,8 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gpspayroll.track_me.Adapters.SalaryHistoryAdapter;
 import com.gpspayroll.track_me.BackPageListener.BackListenerFragment;
-import com.gpspayroll.track_me.DashboardAndAbout.Dashboard;
-import com.gpspayroll.track_me.DashboardAndAbout.MainActivity;
+import com.gpspayroll.track_me.SplashAndDashboard.Dashboard;
+import com.gpspayroll.track_me.SplashAndDashboard.MainActivity;
 import com.gpspayroll.track_me.ModelClasses.StoreSalaryHistory;
 import com.gpspayroll.track_me.R;
 
