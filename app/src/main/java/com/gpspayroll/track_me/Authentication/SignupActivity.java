@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.gpspayroll.track_me.ModelClasses.StoreEmployeeData;
 import com.gpspayroll.track_me.R;
+import com.gpspayroll.track_me.SplashAndDashboard.MainActivity;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -155,15 +156,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    storeDataMethod(email, username, phone);
-
                     waitingDialog.dismiss();
 
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                rememberMethod("I_User");
+                                rememberMethod("I_User", "employeeS");
+                                storeDataMethod(email, username, phone);
 
                                 signupEmailText.setText("");
                                 signupUsernameText.setText("");
@@ -171,9 +171,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                                 signupPasswordText.setText("");
 
                                 finish();
-                                Intent it = new Intent(SignupActivity.this, LoginActivity.class);
+                                Intent it = new Intent(SignupActivity.this, MainActivity.class);
                                 startActivity(it);
-                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                             } else {
                                 waitingDialog.dismiss();
@@ -206,11 +206,15 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void rememberMethod(String passedString){
+    private void rememberMethod(String passedString, String userRole){
         try {
             FileOutputStream fileOutputStream = openFileOutput("Users_Info.txt", Context.MODE_PRIVATE);
             fileOutputStream.write(passedString.getBytes());
             fileOutputStream.close();
+
+            FileOutputStream fileOutputStream2 = openFileOutput("Users_Role.txt", Context.MODE_PRIVATE);
+            fileOutputStream2.write(userRole.getBytes());
+            fileOutputStream2.close();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

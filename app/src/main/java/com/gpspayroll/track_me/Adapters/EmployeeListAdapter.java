@@ -36,6 +36,7 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
 
     Context context;
     ArrayList<StoreEmployeeData> storeEmployeeDataArrayList;
+    DatabaseReference databaseReference;
 
     public EmployeeListAdapter(Context c, ArrayList<StoreEmployeeData> p) {
         context = c;
@@ -61,6 +62,40 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
         holder.nameText.setText(name);
         holder.phoneText.setText(phone);
         holder.emailText.setText(email);
+
+        holder.deleteEmployee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialogBuilder;
+                alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setMessage("Do you want to remove this employee ?");
+                alertDialogBuilder.setIcon(R.drawable.exit);
+                alertDialogBuilder.setCancelable(false);
+
+                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            databaseReference.child(phone).removeValue();
+                            Toast.makeText(context, "Employee Removed Permanently", Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e){
+                            Log.i("Error_Db", e.getMessage());
+                        }
+                    }
+                });
+
+                alertDialogBuilder.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     @Override
@@ -70,12 +105,16 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameText, phoneText, emailText;
+        ImageView deleteEmployee;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             nameText = itemView.findViewById(R.id.employeeNameListId);
             phoneText = itemView.findViewById(R.id.employeePhoneListId);
             emailText = itemView.findViewById(R.id.employeeEmailListId);
+
+            deleteEmployee = itemView.findViewById(R.id.deleteEmployeeFromListId);
+            databaseReference = FirebaseDatabase.getInstance().getReference("Employee Info");
         }
     }
 }

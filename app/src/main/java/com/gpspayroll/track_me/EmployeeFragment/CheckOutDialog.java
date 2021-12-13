@@ -188,7 +188,11 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
                     try {
                         userName.setText(snapshot.getValue().toString());
                     } catch (Exception e){
-                        Toast.makeText(getActivity(), "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(getActivity(), "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                        } catch (Exception exception){
+                            Log.i("Exception", exception.getMessage());
+                        }
                     }
                 }
 
@@ -197,7 +201,11 @@ public class CheckOutDialog extends AppCompatDialogFragment implements View.OnCl
             });
 
         } catch (Exception e){
-            Toast.makeText(getActivity(), "No Data of This User", Toast.LENGTH_SHORT).show();
+            try {
+                Toast.makeText(getActivity(), "No Data of This User", Toast.LENGTH_SHORT).show();
+            } catch (Exception exception){
+                Log.i("Exception", exception.getMessage());
+            }
         }
     }
 }

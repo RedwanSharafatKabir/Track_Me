@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -131,7 +132,11 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
                         userName.setText(username);
 
                     } catch (Exception e){
-                        Toast.makeText(getActivity(), "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(getActivity(), "User Does Not Exist", Toast.LENGTH_SHORT).show();
+                        } catch (Exception exception){
+                            Log.i("Exception", exception.getMessage());
+                        }
                     }
                 }
 
@@ -140,7 +145,11 @@ public class CheckInDialog extends AppCompatDialogFragment implements View.OnCli
             });
 
         } catch (Exception e){
-            Toast.makeText(getActivity(), "No Data of This User", Toast.LENGTH_SHORT).show();
+            try {
+                Toast.makeText(getActivity(), "No Data of This User", Toast.LENGTH_SHORT).show();
+            } catch (Exception exception){
+                Log.i("Exception", exception.getMessage());
+            }
         }
     }
 }

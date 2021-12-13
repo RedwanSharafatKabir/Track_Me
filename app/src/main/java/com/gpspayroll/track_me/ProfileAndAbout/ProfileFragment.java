@@ -149,32 +149,37 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
                 databaseReference.child(userPhone).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        phone.setText(userPhone);
-                        name.setText(snapshot.child("username").getValue().toString());
-                        userEmailText = snapshot.child("userEmail").getValue().toString();
-                        email.setText(userEmailText);
-
                         try {
-                            imageReference.child(userPhone).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    try {
-                                        String imageUrl = snapshot.child("avatar").getValue().toString();
-                                        Picasso.get().load(imageUrl).into(profilePic);
+                            phone.setText(userPhone);
+                            name.setText(snapshot.child("username").getValue().toString());
+                            userEmailText = snapshot.child("userEmail").getValue().toString();
+                            email.setText(userEmailText);
 
-                                    } catch (Exception e){
-                                        progressBar.setVisibility(View.GONE);
+                            try {
+                                imageReference.child(userPhone).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        try {
+                                            String imageUrl = snapshot.child("avatar").getValue().toString();
+                                            Picasso.get().load(imageUrl).into(profilePic);
+
+                                        } catch (Exception e) {
+                                            progressBar.setVisibility(View.GONE);
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {}
-                            });
-                        } catch (Exception e){
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {}
+                                });
+                            } catch (Exception e) {
+                                progressBar.setVisibility(View.GONE);
+                            }
+
+                            progressBar.setVisibility(View.GONE);
+
+                        } catch (Exception exception){
                             progressBar.setVisibility(View.GONE);
                         }
-
-                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override

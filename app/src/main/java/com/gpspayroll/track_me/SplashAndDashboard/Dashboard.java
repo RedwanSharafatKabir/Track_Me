@@ -204,7 +204,11 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
                     } catch (Exception e){
                         progressBar.setVisibility(View.GONE);
-                        getLastLocation();
+                        try{
+                            getLastLocation();
+                        } catch (Exception error){
+                            Log.i("Error", error.getMessage());
+                        }
                     }
                 }
 
@@ -294,42 +298,46 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 ///*
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
-        if (checkPermissions()) {
-            if (isLocationEnabled()) {
-                mFusedLocationClient.getLastLocation().addOnCompleteListener(
-                        new OnCompleteListener<Location>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Location> task) {
-                                Location location = task.getResult();
-                                if (location == null) {
-                                    requestNewLocationData();
-                                } else {
-                                    latitude = String.valueOf(location.getLatitude());
-                                    longitude = String.valueOf(location.getLongitude());
-                                    Log.wtf("lat", latitude);
-                                    Log.wtf("lon", longitude);
+        try {
+            if (checkPermissions()) {
+                if (isLocationEnabled()) {
+                    mFusedLocationClient.getLastLocation().addOnCompleteListener(
+                            new OnCompleteListener<Location>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Location> task) {
+                                    Location location = task.getResult();
+                                    if (location == null) {
+                                        requestNewLocationData();
+                                    } else {
+                                        latitude = String.valueOf(location.getLatitude());
+                                        longitude = String.valueOf(location.getLongitude());
+                                        Log.wtf("lat", latitude);
+                                        Log.wtf("lon", longitude);
 
-                                    currentPlace = getCompleteAddressString(getActivity(), location.getLatitude(), location.getLongitude());
+                                        currentPlace = getCompleteAddressString(getActivity(), location.getLatitude(), location.getLongitude());
 
-                                    Bundle armgs = new Bundle();
-                                    armgs.putString("location_key", currentPlace);
-                                    armgs.putString("latitude_key", latitude);
-                                    armgs.putString("longitude_key", longitude);
+                                        Bundle armgs = new Bundle();
+                                        armgs.putString("location_key", currentPlace);
+                                        armgs.putString("latitude_key", latitude);
+                                        armgs.putString("longitude_key", longitude);
 
-                                    CheckInDialog checkInDialog = new CheckInDialog();
-                                    checkInDialog.setArguments(armgs);
-                                    checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+                                        CheckInDialog checkInDialog = new CheckInDialog();
+                                        checkInDialog.setArguments(armgs);
+                                        checkInDialog.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+                                    }
                                 }
                             }
-                        }
-                );
+                    );
+                } else {
+                    Toast.makeText(getActivity(), "Turn on location", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
             } else {
-                Toast.makeText(getActivity(), "Turn on location", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+                requestPermissions();
             }
-        } else {
-            requestPermissions();
+        } catch (Exception e){
+            Log.i("Error", e.getMessage());
         }
     }
 
@@ -359,9 +367,13 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     };
 
     private boolean checkPermissions() {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;
+        try {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            }
+        } catch (Exception e){
+            Log.i("Error", e.getMessage());
         }
         return false;
     }
