@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:background="#fff">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/upperLayoutNid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+        <EditText
+            android:id="@+id/enterNidId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:fontFamily="sans-serif"
+            android:hint=" NID"
+            android:inputType="textMultiLine"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/GreyBlack"
+            android:textColorHint="@color/GreyBlack"
+            android:textSize="16sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/upperLayoutNid">
+
+        <ProgressBar
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/progressBarNidId"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submitNidId"
+            android:text="Save"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:layout_gravity="center|right"
+            android:fontFamily="sans-serif"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notChangeNidId"
+            android:text="No"
+            android:textColor="@color/Red"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:layout_gravity="center|left"
+            android:fontFamily="sans-serif"/>
+
+    </FrameLayout>
+
+</RelativeLayout>

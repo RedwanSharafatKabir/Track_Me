@@ -234,7 +234,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             user.updateProfile(profile).addOnCompleteListener(task -> {});
         }
 
-        StoreEmployeeData storeEmployeeData = new StoreEmployeeData(username, phone, email);
+        String sampleAddress="Update Now", sampleNid="Update Now";
+
+        StoreEmployeeData storeEmployeeData = new StoreEmployeeData(username, phone, email, sampleNid, sampleAddress);
         databaseReference.child(phone).setValue(storeEmployeeData);
 
         Toast.makeText(SignupActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();

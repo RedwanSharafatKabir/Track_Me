@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
 
         rememberPass = findViewById(R.id.rememberPasswordCheckId);
+        rememberPass.setChecked(true);
         phoneText = findViewById(R.id.inputLoginPhoneId);
         passwordText = findViewById(R.id.inputLoginPassId);
 

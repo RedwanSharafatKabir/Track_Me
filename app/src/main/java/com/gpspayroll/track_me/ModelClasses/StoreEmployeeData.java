@@ -1,12 +1,14 @@
 package com.gpspayroll.track_me.ModelClasses;
 
 public class StoreEmployeeData {
-    String username, userPhone, userEmail;
+    private String username, userPhone, userEmail, userNid, userAddress;
 
-    public StoreEmployeeData(String username, String userPhone, String userEmail) {
+    public StoreEmployeeData(String username, String userPhone, String userEmail, String userNid, String userAddress) {
         this.username = username;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
+        this.userNid = userNid;
+        this.userAddress = userAddress;
     }
 
     public StoreEmployeeData() {
@@ -34,5 +36,21 @@ public class StoreEmployeeData {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getUserNid() {
+        return userNid;
+    }
+
+    public void setUserNid(String userNid) {
+        this.userNid = userNid;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 }

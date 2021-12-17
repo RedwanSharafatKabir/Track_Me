@@ -48,7 +48,6 @@
                     android:textSize="14sp"
                     android:textColor="@color/GreyBlack"
                     android:layout_gravity="center"
-                    android:text="10:00 AM"
                     android:textStyle="bold"
                     android:paddingLeft="5dp"
                     android:layout_marginTop="5dp"/>
@@ -62,7 +61,32 @@
                     android:textSize="14sp"
                     android:textColor="@color/GreyBlack"
                     android:layout_gravity="center"
-                    android:text="6:00 PM"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/employeeNidListId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:fontFamily="sans-serif"
+                    android:textSize="14sp"
+                    android:textColor="@color/GreyBlack"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/employeeAddressListId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:fontFamily="sans-serif"
+                    android:textSize="14sp"
+                    android:textColor="@color/GreyBlack"
+                    android:layout_gravity="center"
                     android:textStyle="bold"
                     android:paddingLeft="5dp"
                     android:layout_marginTop="5dp"/>

@@ -58,10 +58,24 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
         String name = storeEmployeeData.getUsername();
         String phone = storeEmployeeData.getUserPhone();
         String email = storeEmployeeData.getUserEmail();
+        String nid = storeEmployeeData.getUserNid();
+        String address = storeEmployeeData.getUserAddress();
 
         holder.nameText.setText(name);
         holder.phoneText.setText(phone);
         holder.emailText.setText(email);
+
+        if(!nid.equals("Update Now")){
+            holder.nidText.setText("NID: "+nid);
+        } else{
+            holder.nidText.setText("NID: Did not updated");
+        }
+
+        if(!address.equals("Update Now")){
+            holder.addressText.setText("Address: "+address);
+        } else{
+            holder.addressText.setText("Address: Did not updated");
+        }
 
         holder.deleteEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +118,7 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView nameText, phoneText, emailText;
+        TextView nameText, phoneText, emailText, nidText, addressText;
         ImageView deleteEmployee;
 
         public MyViewHolder(@NonNull View itemView){
@@ -112,6 +126,8 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
             nameText = itemView.findViewById(R.id.employeeNameListId);
             phoneText = itemView.findViewById(R.id.employeePhoneListId);
             emailText = itemView.findViewById(R.id.employeeEmailListId);
+            nidText = itemView.findViewById(R.id.employeeNidListId);
+            addressText = itemView.findViewById(R.id.employeeAddressListId);
 
             deleteEmployee = itemView.findViewById(R.id.deleteEmployeeFromListId);
             databaseReference = FirebaseDatabase.getInstance().getReference("Employee Info");

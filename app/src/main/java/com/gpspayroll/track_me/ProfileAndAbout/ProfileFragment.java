@@ -65,19 +65,19 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
     private View views;
     private Fragment fragment;
     private CircleImageView profilePic;
-    public static BackListenerFragment backBtnListener;
-    private CardView resetPass, logout, backFromProfile;
-    private FragmentTransaction fragmentTransaction;
     private NetworkInfo netInfo;
     private ConnectivityManager cm;
-    private TextView phone, email, name;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference, imageReference;
     private ProgressBar progressBar;
     private int PERMISSION_REQUEST_CODE = 101;
     private ProgressDialog dialog;
     private static Uri uriProfileImage;
-    private String messageRole, userPhone, userEmailText, profileImageUrl="";
+    private FragmentTransaction fragmentTransaction;
+    public static BackListenerFragment backBtnListener;
+    private DatabaseReference databaseReference, imageReference;
+    private TextView phone, email, name, nid, address;
+    private CardView resetPass, logout, backFromProfile, editNid, editAddress, changeImage;
+    private String messageRole, userPhone, userEmailText, profileImageUrl="", userNid, userAddress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,6 +85,7 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
 
         dialog = new ProgressDialog(getActivity());
         progressBar = views.findViewById(R.id.profileProgressId);
+
         resetPass = views.findViewById(R.id.resetPassId);
         resetPass.setOnClickListener(this);
         logout = views.findViewById(R.id.logoutId);
@@ -93,20 +94,32 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
         backFromProfile.setOnClickListener(this);
         profilePic = views.findViewById(R.id.profilePicId);
         profilePic.setOnClickListener(this);
+        editNid = views.findViewById(R.id.uploadNidId);
+        editNid.setOnClickListener(this);
+        editAddress = views.findViewById(R.id.uploadAddressId);
+        editAddress.setOnClickListener(this);
+        changeImage = views.findViewById(R.id.uploadProfilePicId);
+        changeImage.setOnClickListener(this);
 
         phone = views.findViewById(R.id.userPhoneId);
         email = views.findViewById(R.id.userEmailId);
         name = views.findViewById(R.id.userNameId);
+        nid = views.findViewById(R.id.userNidId);
+        address = views.findViewById(R.id.userAddressId);
 
         try{
             messageRole = getArguments().getString("messageRole");
             if(messageRole.equals("adminS")){
                 getAdminPhone();
                 databaseReference = FirebaseDatabase.getInstance().getReference("Admin Info");
+                editNid.setVisibility(View.GONE);
+                editAddress.setVisibility(View.GONE);
 
             } else if(messageRole.equals("employeeS")){
                 userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
                 databaseReference = FirebaseDatabase.getInstance().getReference("Employee Info");
+                editNid.setVisibility(View.VISIBLE);
+                editAddress.setVisibility(View.VISIBLE);
             }
         } catch (Exception e){
             Log.i("Exception", e.getMessage());
@@ -150,10 +163,24 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         try {
-                            phone.setText(userPhone);
-                            name.setText(snapshot.child("username").getValue().toString());
-                            userEmailText = snapshot.child("userEmail").getValue().toString();
-                            email.setText(userEmailText);
+                            if(messageRole.equals("adminS")){
+                                name.setText(snapshot.child("username").getValue().toString());
+                                userEmailText = snapshot.child("userEmail").getValue().toString();
+
+                                phone.setText(userPhone);
+                                email.setText(userEmailText);
+
+                            } else if(messageRole.equals("employeeS")){
+                                name.setText(snapshot.child("username").getValue().toString());
+                                userEmailText = snapshot.child("userEmail").getValue().toString();
+                                userNid = snapshot.child("userNid").getValue().toString();
+                                userAddress = snapshot.child("userAddress").getValue().toString();
+
+                                phone.setText(userPhone);
+                                email.setText(userEmailText);
+                                nid.setText(userNid);
+                                address.setText(userAddress);
+                            }
 
                             try {
                                 imageReference.child(userPhone).addValueEventListener(new ValueEventListener() {
@@ -210,6 +237,32 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
             resetPassword.show(getActivity().getSupportFragmentManager(), "Sample dialog");
         }
 
+        if(v.getId()==R.id.uploadNidId) {
+            Bundle armgs = new Bundle();
+            armgs.putString("email_key", email.getText().toString());
+            armgs.putString("phone_key", phone.getText().toString());
+            armgs.putString("username_key", name.getText().toString());
+            armgs.putString("nid_key", nid.getText().toString());
+            armgs.putString("address_key", address.getText().toString());
+
+            EditNid editNid = new EditNid();
+            editNid.setArguments(armgs);
+            editNid.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+        }
+
+        if(v.getId()==R.id.uploadAddressId) {
+            Bundle armgs = new Bundle();
+            armgs.putString("email_key", email.getText().toString());
+            armgs.putString("phone_key", phone.getText().toString());
+            armgs.putString("username_key", name.getText().toString());
+            armgs.putString("nid_key", nid.getText().toString());
+            armgs.putString("address_key", address.getText().toString());
+
+            EditAddress editAddress = new EditAddress();
+            editAddress.setArguments(armgs);
+            editAddress.show(getActivity().getSupportFragmentManager(), "Sample dialog");
+        }
+
         if(v.getId()==R.id.logoutId) {
             logoutApp();
         }
@@ -223,7 +276,7 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
             fragmentTransaction.commit();
         }
 
-        if(v.getId()==R.id.profilePicId) {
+        if(v.getId()==R.id.uploadProfilePicId) {
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getActivity(),
                     Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
