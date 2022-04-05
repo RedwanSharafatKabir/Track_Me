@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.18703703703703703" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.209375" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_splash_screen.xml" value="0.209375" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/fragment_about.xml" value="0.22" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Poribohon Lagbe/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/drawable-v24/semi_circle_shape.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/drawable/back_arrow.xml" value="0.22552083333333334" />

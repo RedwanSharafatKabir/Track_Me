@@ -7,7 +7,7 @@
     android:background="@color/lightPurpleBackground"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Authentication.LoginActivity">
+    tools:context=".authentication.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,7 +95,8 @@
                                 android:textColor="#000"
                                 android:textColorHint="#000"
                                 android:layout_gravity="center"
-                                android:drawableRight="@drawable/ic_outline_phone_24"/>
+                                android:drawableRight="@drawable/ic_outline_phone_24"
+                                android:maxLength="11"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 

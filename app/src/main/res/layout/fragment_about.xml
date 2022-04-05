@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileAndAbout.AboutFragment"
+    tools:context=".profileAndAbout.AboutFragment"
     android:background="#fff"
     android:orientation="vertical">
 
@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -30,7 +30,7 @@
                 android:textColor="#000"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="50dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -40,58 +40,13 @@
                 android:text="Version: 1.0.1"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:text="Supervised by -"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="italic" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:text="Shraboni Afroz"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:text="Mobile: 01791017250\nEmail: samapti.afroza@gmail.com\nDesignation: Sr. Lecturer"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="150dp"
                 android:fontFamily="serif"
                 android:gravity="center"
                 android:text="Developed by -"
@@ -102,68 +57,25 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/colorPrimaryDark" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="serif-monospace"
+                android:gravity="center"
+                android:text="Redwan Sharafat Kabir\n\n&amp;\n\nMd. Abu Sayem"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:text="Sourav Kundu\nID: 180222042"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:text="Farid Hossain\nID: 180222047"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="serif-monospace"
-                android:gravity="center"
-                android:text="Md Abid Hasan\nID: 180222048"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="10dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/colorPrimaryDark" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:text="Department of CSE,"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="serif"
-                android:gravity="center"
-                android:text="'European University of Bangladesh'"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_marginBottom="80dp"/>
 
         </LinearLayout>
 

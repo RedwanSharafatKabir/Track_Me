@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EUB-APGT</string>
+    <string name="app_name">Employee Payroll</string>
     <string name="Sign_Up_Text"><u>Sign Up</u></string>
     <string name="Login_Text"><u>Login</u></string>
 

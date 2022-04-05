@@ -7,7 +7,7 @@
     android:background="#fff"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".SplashAndDashboard.SplashScreen">
+    tools:context=".splashAndDashboard.SplashScreen">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:layout_width="150dp"

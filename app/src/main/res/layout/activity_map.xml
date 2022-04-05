@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Map.MapActivity">
+    tools:context=".map.MapActivity">
 
     <fragment
         android:id="@+id/mapID"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Map.MapActivity" />
+        tools:context=".map.MapActivity" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
