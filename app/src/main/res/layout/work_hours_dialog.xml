@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -58,6 +59,7 @@
         android:layout_gravity="center"
         android:fontFamily="sans-serif"
         android:text="@string/work_hour"
+        android:justificationMode="inter_word"
         android:gravity="center|start"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"

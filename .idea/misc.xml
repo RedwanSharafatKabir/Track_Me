@@ -3,11 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/drawable/back_arrow.xml" value="0.1355" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/drawable/ic_baseline_keyboard_double_arrow_left_24.xml" value="0.1355" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout-v26/work_hours_dialog.xml" value="0.209375" />
         <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_login.xml" value="0.18703703703703703" />
         <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_map.xml" value="0.22" />
         <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_signup.xml" value="0.209375" />
         <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/activity_splash_screen.xml" value="0.209375" />
         <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/fragment_about.xml" value="0.22" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/fragment_dashboard.xml" value="0.2" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/fragment_office_timeline.xml" value="0.2" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/fragment_profile.xml" value="0.209375" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/work_environment_dialog.xml" value="0.18" />
+        <entry key="..\:/Android Projects with Java/Track_Me/app/src/main/res/layout/work_hours_dialog.xml" value="0.20615384615384616" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Poribohon Lagbe/Track_Me/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/drawable-v24/semi_circle_shape.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Redwan/OneDrive/Desktop/Track_Me/app/src/main/res/drawable/back_arrow.xml" value="0.22552083333333334" />

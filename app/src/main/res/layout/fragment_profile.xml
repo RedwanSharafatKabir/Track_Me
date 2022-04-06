@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left|top"
             android:id="@+id/backFromProfileId"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="5dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/back_arrow"
                 android:background="#fff"
-                android:padding="8dp" />
+                android:padding="6dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -73,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -161,7 +161,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -242,7 +242,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -294,7 +294,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -357,7 +357,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -392,7 +392,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"

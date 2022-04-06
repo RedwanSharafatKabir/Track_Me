@@ -95,7 +95,9 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
-                                android:text="@string/work_environment"/>
+                                android:text="@string/work_environment"
+                                android:textAlignment="inherit"
+                                android:justificationMode="inter_word"/>
 
                         </LinearLayout>
 
@@ -157,7 +159,8 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
-                                android:text="@string/work_hour"/>
+                                android:text="@string/work_hour"
+                                android:justificationMode="inter_word"/>
 
                         </LinearLayout>
 
@@ -218,6 +221,7 @@
                                 android:textSize="14sp"
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
+                                android:justificationMode="inter_word"
                                 android:paddingLeft="10dp"/>
 
                         </LinearLayout>
@@ -280,6 +284,7 @@
                                 android:textColor="@color/GreyBlack"
                                 android:layout_gravity="center"
                                 android:paddingLeft="10dp"
+                                android:justificationMode="inter_word"
                                 android:text="@string/weekend"/>
 
                         </LinearLayout>
