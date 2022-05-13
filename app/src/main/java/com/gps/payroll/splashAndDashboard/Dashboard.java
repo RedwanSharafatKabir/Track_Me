@@ -280,7 +280,6 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
     }
 
     // Map Location
-///*
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
         try {
@@ -411,5 +410,5 @@ public class Dashboard extends Fragment implements BackListenerFragment, View.On
 
         return strAdd;
     }
-//*/
+
 }
