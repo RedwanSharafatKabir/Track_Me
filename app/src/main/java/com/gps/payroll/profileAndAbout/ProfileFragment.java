@@ -100,8 +100,9 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
 
         try{
             messageRole = requireArguments().getString("messageRole");
+
             if(messageRole.equals("adminS")){
-                getAdminPhone();
+                userPhone = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getDisplayName();
                 databaseReference = FirebaseDatabase.getInstance().getReference("Admin Info");
                 editNid.setVisibility(View.GONE);
                 editAddress.setVisibility(View.GONE);
@@ -120,25 +121,6 @@ public class ProfileFragment extends Fragment implements BackListenerFragment, V
         getUserInfo();
 
         return views;
-    }
-
-    private void getAdminPhone(){
-        try {
-            String recievedMessageTc;
-            FileInputStream fileInputStreamTc = requireActivity().openFileInput("Admin_Phone.txt");
-            InputStreamReader inputStreamReaderTc = new InputStreamReader(fileInputStreamTc);
-            BufferedReader bufferedReaderTc = new BufferedReader(inputStreamReaderTc);
-            StringBuilder stringBuilder = new StringBuilder();
-
-            while((recievedMessageTc = bufferedReaderTc.readLine())!=null){
-                stringBuilder.append(recievedMessageTc);
-            }
-
-            userPhone = stringBuilder.toString();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void getUserInfo() {

@@ -1,9 +1,8 @@
 package com.gps.payroll.authentication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,16 +12,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.gps.payroll.modelClasses.StoreEmployeeData;
 import com.gps.payroll.R;
 import com.gps.payroll.splashAndDashboard.MainActivity;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,10 +40,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private ConnectivityManager cm;
     private NetworkInfo netInfo;
     private FirebaseAuth mAuth;
+    private CheckBox userType;
     private TextView loginPage, signUp;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, adminReference;
     private EditText signupEmailText, signupUsernameText, signupPasswordText, signupPhoneText;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +58,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Employee Info");
+        adminReference = FirebaseDatabase.getInstance().getReference("Admin Info");
 
+        userType = findViewById(R.id.userTypeCheckId);
         signupEmailText = findViewById(R.id.inputSignupEmailId);
         signupUsernameText = findViewById(R.id.inputSignupUsernameId);
         signupPasswordText = findViewById(R.id.inputSignupPassId);
@@ -137,7 +136,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
             else {
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    signupWithEmail(email, username, phone, password);
+                    if(userType.isChecked()){
+                        signupAdmin(email, username, phone, password);
+
+                    } else {
+                        signupUser(email, username, phone, password);
+                    }
 
                 } else {
                     waitingDialog.dismiss();
@@ -151,56 +155,99 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void signupWithEmail(String email, String username, String phone, String password){
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    waitingDialog.dismiss();
+    private void signupAdmin(String email, String username, String phone, String password){
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                waitingDialog.dismiss();
 
-                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                rememberMethod("I_User", "employeeS");
-                                storeDataMethod(email, username, phone);
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        rememberMethod("I_User", "adminS");
+                        storeAdminData(email, username, phone);
 
-                                signupEmailText.setText("");
-                                signupUsernameText.setText("");
-                                signupPhoneText.setText("");
-                                signupPasswordText.setText("");
+                        signupEmailText.setText("");
+                        signupUsernameText.setText("");
+                        signupPhoneText.setText("");
+                        signupPasswordText.setText("");
 
-                                finish();
-                                Intent it = new Intent(SignupActivity.this, MainActivity.class);
-                                startActivity(it);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-                            } else {
-                                waitingDialog.dismiss();
-                                Log.i("Signup_Exception", task.getException().getMessage());
-                                Toast t = Toast.makeText(getApplicationContext(), "Authentication failed\nError : " +
-                                        task.getException().getMessage(), Toast.LENGTH_LONG);
-                                t.setGravity(Gravity.CENTER, 0, 0);
-                                t.show();
-                            }
-                        }
-                    });
-
-                } else {
-                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        waitingDialog.dismiss();
-                        Toast t = Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG);
-                        t.setGravity(Gravity.CENTER, 0, 0);
-                        t.show();
+                        finish();
+                        Intent it = new Intent(SignupActivity.this, MainActivity.class);
+                        startActivity(it);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     } else {
                         waitingDialog.dismiss();
-                        Log.i("Signup_Exception", task.getException().getMessage());
-                        Toast t = Toast.makeText(getApplicationContext(), "Authentication failed. Error : "
-                                + "Connection lost.", Toast.LENGTH_LONG);
+                        Log.i("Signup_Exception", task1.getException().getMessage());
+                        Toast t = Toast.makeText(getApplicationContext(), "Authentication failed\nError : " +
+                                task1.getException().getMessage(), Toast.LENGTH_LONG);
                         t.setGravity(Gravity.CENTER, 0, 0);
                         t.show();
                     }
+                });
+
+            } else {
+                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                    waitingDialog.dismiss();
+                    Toast t = Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG);
+                    t.setGravity(Gravity.CENTER, 0, 0);
+                    t.show();
+
+                } else {
+                    waitingDialog.dismiss();
+                    Log.i("Signup_Exception", task.getException().getMessage());
+                    Toast t = Toast.makeText(getApplicationContext(), "Authentication failed. Error : "
+                            + "Connection lost.", Toast.LENGTH_LONG);
+                    t.setGravity(Gravity.CENTER, 0, 0);
+                    t.show();
+                }
+            }
+        });
+    }
+
+    private void signupUser(String email, String username, String phone, String password){
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                waitingDialog.dismiss();
+
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        rememberMethod("I_User", "employeeS");
+                        storeDataMethod(email, username, phone);
+
+                        signupEmailText.setText("");
+                        signupUsernameText.setText("");
+                        signupPhoneText.setText("");
+                        signupPasswordText.setText("");
+
+                        finish();
+                        Intent it = new Intent(SignupActivity.this, MainActivity.class);
+                        startActivity(it);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                    } else {
+                        waitingDialog.dismiss();
+                        Log.i("Signup_Exception", task1.getException().getMessage());
+                        Toast t = Toast.makeText(getApplicationContext(), "Authentication failed\nError : " +
+                                task1.getException().getMessage(), Toast.LENGTH_LONG);
+                        t.setGravity(Gravity.CENTER, 0, 0);
+                        t.show();
+                    }
+                });
+
+            } else {
+                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                    waitingDialog.dismiss();
+                    Toast t = Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_LONG);
+                    t.setGravity(Gravity.CENTER, 0, 0);
+                    t.show();
+
+                } else {
+                    waitingDialog.dismiss();
+                    Log.i("Signup_Exception", task.getException().getMessage());
+                    Toast t = Toast.makeText(getApplicationContext(), "Authentication failed. Error : "
+                            + "Connection lost.", Toast.LENGTH_LONG);
+                    t.setGravity(Gravity.CENTER, 0, 0);
+                    t.show();
                 }
             }
         });
@@ -240,6 +287,24 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         databaseReference.child(phone).setValue(storeEmployeeData);
 
         Toast.makeText(SignupActivity.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
+    }
+
+    private void storeAdminData(String email, String username, String phone){
+        String displayname = phone;
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user != null) {
+            UserProfileChangeRequest profile;
+            profile = new UserProfileChangeRequest.Builder().setDisplayName(displayname).build();
+            user.updateProfile(profile).addOnCompleteListener(task -> {});
+        }
+
+        String sampleAddress="Update Now", sampleNid="Update Now";
+
+        StoreEmployeeData storeEmployeeData = new StoreEmployeeData(username, phone, email, sampleNid, sampleAddress);
+        adminReference.child(phone).setValue(storeEmployeeData);
+
+        Toast.makeText(SignupActivity.this, "Admin Registered", Toast.LENGTH_SHORT).show();
     }
 
     @Override

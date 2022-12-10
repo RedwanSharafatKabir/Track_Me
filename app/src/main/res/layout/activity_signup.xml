@@ -214,6 +214,15 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <CheckBox
+                        android:id="@+id/userTypeCheckId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Register as Admin"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:buttonTint="@color/colorPrimaryDark"/>
+
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView

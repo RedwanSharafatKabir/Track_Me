@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "337444019069",
-    "firebase_url": "https://track-me-a5036-default-rtdb.firebaseio.com",
-    "project_id": "track-me-a5036",
-    "storage_bucket": "track-me-a5036.appspot.com"
+    "project_number": "1050163308050",
+    "project_id": "employee-payroll-911eb",
+    "storage_bucket": "employee-payroll-911eb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:337444019069:android:40b4d59de82349b4b9ca14",
+        "mobilesdk_app_id": "1:1050163308050:android:b9023b128816d206afdacb",
         "android_client_info": {
           "package_name": "com.gps.payroll"
         }
       },
       "oauth_client": [
         {
-          "client_id": "337444019069-fe6mma5od3f9q3ks2236cnd9ruook657.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gps.payroll",
-            "certificate_hash": "89684ac75846434ab782ba2a6b96533dbcc5fbb7"
-          }
-        },
-        {
-          "client_id": "337444019069-957je5ro5euo0e2susqfdm01t8ef3i32.apps.googleusercontent.com",
+          "client_id": "1050163308050-qtgr8ok645u2k9j4ddbhpq5ut0f4806o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAZOdg1TV6HKDQ6t4HU_OblPk5jcUTJZGc"
+          "current_key": "AIzaSyCMdxa5QrzRZDz4l-vpqWZK2BS6wyHFtsM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "337444019069-957je5ro5euo0e2susqfdm01t8ef3i32.apps.googleusercontent.com",
+              "client_id": "1050163308050-qtgr8ok645u2k9j4ddbhpq5ut0f4806o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
