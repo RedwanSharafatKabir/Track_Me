@@ -371,6 +371,7 @@
                             android:layout_height="70dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/change_pass"
+                            app:tint="@color/colorPrimaryDark"
                             android:padding="10dp"/>
 
                         <TextView

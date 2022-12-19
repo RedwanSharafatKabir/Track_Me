@@ -24,7 +24,8 @@
                 android:layout_height="60dp"
                 android:src="@drawable/timeline"
                 android:padding="10dp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                app:tint="@color/colorPrimary"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,6 +107,7 @@
                             android:layout_height="80dp"
                             android:layout_weight="10"
                             android:src="@drawable/plant"
+                            app:tint="@color/colorPrimary"
                             android:padding="12dp"/>
 
                     </LinearLayout>
@@ -169,6 +171,7 @@
                             android:layout_height="80dp"
                             android:layout_weight="10"
                             android:src="@drawable/working_hours"
+                            app:tint="@color/colorPrimary"
                             android:padding="10dp"/>
 
                     </LinearLayout>
@@ -231,7 +234,8 @@
                             android:layout_height="80dp"
                             android:layout_weight="10"
                             android:src="@drawable/total_employees"
-                            android:padding="17dp"/>
+                            android:padding="17dp"
+                            app:tint="@color/colorPrimary"/>
 
                     </LinearLayout>
 
@@ -294,6 +298,7 @@
                             android:layout_height="80dp"
                             android:layout_weight="10"
                             android:src="@drawable/weekend"
+                            app:tint="@color/colorPrimary"
                             android:padding="16dp"/>
 
                     </LinearLayout>

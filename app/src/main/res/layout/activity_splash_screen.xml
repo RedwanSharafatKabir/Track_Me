@@ -10,11 +10,10 @@
     tools:context=".splashAndDashboard.SplashScreen">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/app_logo"
         app:riv_corner_radius="35dp"
-        android:padding="10dp"
         android:layout_gravity="center"/>
 
     <LinearLayout
@@ -61,7 +60,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="22sp"
         android:fontFamily="sans-serif"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -72,7 +71,7 @@
         android:textColor="@color/GreyBlack"
         android:textSize="18sp"
         android:fontFamily="sans-serif"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:padding="10dp"/>
 
     <androidx.cardview.widget.CardView
@@ -81,7 +80,7 @@
         android:layout_gravity="center"
         android:id="@+id/getStartedFloatingId"
         android:layout_marginBottom="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true">

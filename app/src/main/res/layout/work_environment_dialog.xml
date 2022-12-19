@@ -36,7 +36,8 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/plant" />
+            android:src="@drawable/plant"
+            app:tint="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_width="wrap_content"
