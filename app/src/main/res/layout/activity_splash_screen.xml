@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="EUB"
+            android:text="DIU"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp"
             android:fontFamily="sans-serif"
